@@ -13,6 +13,18 @@ export const siteConfig = {
 
 export const hiddenRepos = ["web", "myweb"];
 
+export const outsiderSymbols = [
+  "/outsider/Eternal_Edict_Symbol2.webp",
+  "/outsider/Chaos_Mist_Symbol2.webp",
+  "/outsider/Second_Law_Symbol2.webp",
+  "/outsider/Patriarch_Symbol2.webp",
+  "/outsider/Condenser_Symbol2.webp",
+  "/outsider/Tail-Devourer_Symbol2.webp",
+  "/outsider/Eternal_Aeon_Symbol2.webp",
+  "/outsider/Everlasting_Symbol2.webp",
+  "/outsider/Chaos_Primogenitor_Symbol2.webp",
+] as const;
+
 export const pathways = [
   {
     name: "Seer Pathway",
@@ -20,7 +32,7 @@ export const pathways = [
     domain: "Frontend Architecture",
     skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
     color: "violet",
-    symbol: "/pathways/Fool_Symbol2.webp",
+    symbol: outsiderSymbols[0],
   },
   {
     name: "Artificer Pathway",
@@ -28,7 +40,7 @@ export const pathways = [
     domain: "Motion & Interaction",
     skills: ["Framer Motion", "GSAP", "Three.js", "WebGL"],
     color: "cyan",
-    symbol: "/pathways/Paragon_Symbol2.webp",
+    symbol: outsiderSymbols[1],
   },
   {
     name: "Hunter Pathway",
@@ -36,7 +48,7 @@ export const pathways = [
     domain: "Performance & Optimization",
     skills: ["Core Web Vitals", "SSR/SSG", "Bundle Analysis", "Caching"],
     color: "amber",
-    symbol: "/pathways/Red_Priest_Symbol2.webp",
+    symbol: outsiderSymbols[2],
   },
   {
     name: "Reader Pathway",
@@ -44,7 +56,7 @@ export const pathways = [
     domain: "Design Systems",
     skills: ["Component Libraries", "Storybook", "Figma", "Accessibility"],
     color: "rose",
-    symbol: "/pathways/White_Tower_Symbol2.webp",
+    symbol: outsiderSymbols[3],
   },
 ];
 
@@ -57,7 +69,7 @@ export const navLinks = [
 
 export const grimoireArcana = [
   { roman: "0", name: "The Fool", symbol: "/pathways/Fool_Symbol2.webp" },
-  { roman: "I", name: "The Magician", symbol: "/pathways/Error_Symbol2.webp" },
+  { roman: "I", name: "The Magician", symbol: "/pathways/Door_Symbol2.webp" },
   { roman: "II", name: "The High Priestess", symbol: "/pathways/Darkness_Symbol2.webp" },
   { roman: "III", name: "The Empress", symbol: "/pathways/Mother_Symbol2.webp" },
   { roman: "IV", name: "The Emperor", symbol: "/pathways/Black_Emperor_Symbol2.webp" },
@@ -76,4 +88,5 @@ export const grimoireArcana = [
   { roman: "XVII", name: "The Star", symbol: "/pathways/Sun_Symbol2.webp" },
   { roman: "XVIII", name: "The Moon", symbol: "/pathways/Moon_Symbol2.webp" },
   { roman: "XIX", name: "The Sun", symbol: "/pathways/Chained_Symbol2.webp" },
+  { roman: "XX", name: "Judgement", symbol: "/pathways/Error_Symbol2.webp" },
 ] as const;

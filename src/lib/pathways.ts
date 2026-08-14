@@ -126,6 +126,28 @@ export const pathwayChoices: PathwayChoice[] = [
     ],
   },
   {
+    id: "door",
+    name: "Door",
+    sequenceName: "Apprentice",
+    sequence: "Sequence 9 → Sequence 0",
+    description:
+      "You open routes others cannot see — portals, navigation, and the hidden doors between states of an application.",
+    symbol: "/pathways/Door_Symbol2.webp",
+    color: "cyan",
+    ladder: [
+      "Apprentice",
+      "Trickmaster",
+      "Astrologer",
+      "Scribe",
+      "Traveler",
+      "Secrets Sorcerer",
+      "Wanderer",
+      "Planeswalker",
+      "Key of Stars",
+      "Door",
+    ],
+  },
+  {
     id: "error",
     name: "Error",
     sequenceName: "Marauder",

@@ -41,7 +41,6 @@ export function Skills() {
           ...pathway,
           name: `${selected.name} Pathway`,
           sequence: `Sequence 0 · ${selected.name}`,
-          symbol: selected.symbol,
           color: selected.color,
         }
       : pathway

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ExternalLink, GitFork, Star } from "lucide-react";
 import { GitHubIcon } from "@/components/ui/SocialIcons";
 import { cn } from "@/lib/utils";
-import { grimoireArcana } from "@/lib/data";
+import { grimoireArcana, outsiderSymbols } from "@/lib/data";
 import type { GithubProject } from "@/lib/github";
 
 const languageColors: Record<string, string> = {
@@ -36,6 +36,7 @@ interface TarotCardProps {
 
 export function TarotCard({ project, index }: TarotCardProps) {
   const arcana = grimoireArcana[index % grimoireArcana.length];
+  const symbol = outsiderSymbols[index % outsiderSymbols.length];
 
   return (
     <article
@@ -75,8 +76,8 @@ export function TarotCard({ project, index }: TarotCardProps) {
             <div className="absolute inset-4 rounded-full border border-accent-amber/10" />
             <div className="relative z-10 h-32 w-32 overflow-hidden rounded-full">
               <Image
-                src={arcana.symbol}
-                alt={`${arcana.name} pathway symbol`}
+                src={symbol}
+                alt={`${arcana.name} outsider symbol`}
                 fill
                 sizes="128px"
                 className="object-cover mix-blend-screen"
