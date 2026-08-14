@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Cinzel, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { PathwayProvider } from "@/components/providers/PathwayProvider";
+import { SceneBackground } from "@/components/effects/SceneBackground";
+import { ParticleBackground } from "@/components/effects/ParticleBackground";
 import "./globals.css";
 
 const cinzel = Cinzel({
@@ -44,7 +47,11 @@ export default function RootLayout({
     >
       <body className="scanline-overlay min-h-full bg-background font-sans text-foreground">
         <div className="noise-overlay" />
-        {children}
+        <PathwayProvider>
+          <SceneBackground />
+          <ParticleBackground />
+          {children}
+        </PathwayProvider>
       </body>
     </html>
   );

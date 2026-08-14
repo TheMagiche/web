@@ -1,17 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Eye, Sparkles, Zap, BookOpen } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MysticalCard } from "@/components/ui/MysticalCard";
 import { pathways } from "@/lib/data";
-
-const iconMap = {
-  Eye,
-  Sparkles,
-  Zap,
-  BookOpen,
-};
+import { usePathway } from "@/components/providers/PathwayProvider";
 
 const colorMap = {
   violet: {
@@ -41,6 +35,19 @@ const colorMap = {
 };
 
 export function Skills() {
+  const { selected } = usePathway();
+  const displayedPathways = pathways.map((pathway, index) =>
+    index === 0
+      ? {
+          ...pathway,
+          name: `${selected.name} Pathway`,
+          sequence: `Sequence 9 · ${selected.sequenceName}`,
+          symbol: selected.symbol,
+          color: selected.color,
+        }
+      : pathway
+  );
+
   return (
     <section id="skills" className="relative px-6 py-32">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-violet/[0.02] to-transparent" />
@@ -52,8 +59,7 @@ export function Skills() {
         />
 
         <div className="grid gap-6 md:grid-cols-2">
-          {pathways.map((pathway, i) => {
-            const Icon = iconMap[pathway.icon as keyof typeof iconMap];
+          {displayedPathways.map((pathway, i) => {
             const colors = colorMap[pathway.color as keyof typeof colorMap];
 
             return (
@@ -63,8 +69,16 @@ export function Skills() {
                 delay={i * 0.1}
               >
                 <div className="flex items-start justify-between">
-                  <div className={`rounded border p-2.5 ${colors.bg} ${colors.border}`}>
-                    <Icon className={`h-5 w-5 ${colors.text}`} />
+                  <div
+                    className={`relative h-16 w-16 overflow-hidden rounded-full border ${colors.border} ${colors.bg}`}
+                  >
+                    <Image
+                      src={pathway.symbol}
+                      alt={`${pathway.name} symbol`}
+                      fill
+                      sizes="64px"
+                      className="object-cover mix-blend-screen"
+                    />
                   </div>
                   <span className="font-mono text-[10px] uppercase tracking-widest text-muted/60">
                     {pathway.sequence}
@@ -96,7 +110,7 @@ export function Skills() {
                     whileInView={{ width: `${85 - i * 5}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: 0.3 + i * 0.1 }}
-                    className={`h-full rounded-full bg-gradient-to-r from-accent-violet to-accent-cyan`}
+                    className="h-full rounded-full bg-gradient-to-r from-accent-violet to-accent-cyan"
                   />
                 </div>
               </MysticalCard>

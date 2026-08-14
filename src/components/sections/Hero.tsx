@@ -3,15 +3,18 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Sparkles } from "lucide-react";
 import { GlitchText } from "@/components/effects/GlitchText";
+import { usePathway } from "@/components/providers/PathwayProvider";
 import { siteConfig } from "@/lib/data";
 
 export function Hero() {
+  const { selected } = usePathway();
+
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen flex-col items-center justify-center px-6 pt-20"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-20"
     >
-      <div className="absolute inset-0 grid-bg opacity-50" />
+      <div className="absolute inset-0 grid-bg opacity-25" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
@@ -35,7 +38,7 @@ export function Hero() {
         >
           <Sparkles className="h-4 w-4 text-accent-amber animate-flicker" />
           <span className="font-mono text-xs uppercase tracking-[0.4em] text-accent-cyan">
-            Sequence 9 · Seer
+            Sequence 9 · {selected.sequenceName}
           </span>
           <Sparkles className="h-4 w-4 text-accent-amber animate-flicker" />
         </motion.div>
@@ -91,7 +94,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1.2 }}
-        className="absolute bottom-10"
+        className="absolute bottom-10 z-10"
       >
         <a
           href="#about"

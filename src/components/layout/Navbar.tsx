@@ -27,7 +27,7 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6">
-        <a href="#hero" className="group flex items-center gap-2">
+        <a href="/home#hero" className="group flex items-center gap-2">
           <Eye className="h-5 w-5 text-accent-violet transition-colors group-hover:text-accent-cyan" />
           <span className="font-display text-lg font-bold tracking-wider">
             {siteConfig.name}
@@ -48,7 +48,7 @@ export function Navbar() {
         </ul>
 
         <a
-          href="#contact"
+          href="/home#contact"
           className="hidden rounded border border-accent-violet/30 px-4 py-2 font-mono text-xs uppercase tracking-widest text-accent-violet transition-all hover:border-accent-cyan/50 hover:text-accent-cyan hover:shadow-[0_0_20px_rgba(0,245,212,0.2)] md:block"
         >
           Initiate Contact
@@ -85,7 +85,7 @@ export function Navbar() {
               ))}
               <li>
                 <a
-                  href="#contact"
+                  href="/home#contact"
                   onClick={() => setMobileOpen(false)}
                   className="inline-block rounded border border-accent-violet/30 px-4 py-2 font-mono text-xs uppercase tracking-widest text-accent-violet"
                 >

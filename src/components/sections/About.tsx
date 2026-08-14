@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Eye, Code2, Layers } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MysticalCard } from "@/components/ui/MysticalCard";
+import { usePathway } from "@/components/providers/PathwayProvider";
 
 const traits = [
   {
@@ -27,6 +28,8 @@ const traits = [
 ];
 
 export function About() {
+  const { selected } = usePathway();
+
   return (
     <section id="about" className="relative px-6 py-32">
       <div className="mx-auto max-w-6xl">
@@ -47,7 +50,8 @@ export function About() {
               I am{" "}
               <span className="text-gradient font-semibold">theMagiche</span>
               — a frontend developer who treats every project as a mystical
-              undertaking. Like a Seer navigating the fog of uncertainty, I
+              undertaking. Like a {selected.sequenceName} navigating the fog of
+              uncertainty, I
               bring clarity to complex interfaces through clean architecture,
               deliberate motion, and obsessive attention to detail.
             </p>

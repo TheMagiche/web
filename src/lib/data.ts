@@ -20,7 +20,7 @@ export const pathways = [
     domain: "Frontend Architecture",
     skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
     color: "violet",
-    icon: "Eye",
+    symbol: "/pathways/Fool_Symbol2.webp",
   },
   {
     name: "Artificer Pathway",
@@ -28,7 +28,7 @@ export const pathways = [
     domain: "Motion & Interaction",
     skills: ["Framer Motion", "GSAP", "Three.js", "WebGL"],
     color: "cyan",
-    icon: "Sparkles",
+    symbol: "/pathways/Paragon_Symbol2.webp",
   },
   {
     name: "Hunter Pathway",
@@ -36,7 +36,7 @@ export const pathways = [
     domain: "Performance & Optimization",
     skills: ["Core Web Vitals", "SSR/SSG", "Bundle Analysis", "Caching"],
     color: "amber",
-    icon: "Zap",
+    symbol: "/pathways/Red_Priest_Symbol2.webp",
   },
   {
     name: "Reader Pathway",
@@ -44,13 +44,37 @@ export const pathways = [
     domain: "Design Systems",
     skills: ["Component Libraries", "Storybook", "Figma", "Accessibility"],
     color: "rose",
-    icon: "BookOpen",
+    symbol: "/pathways/White_Tower_Symbol2.webp",
   },
 ];
 
 export const navLinks = [
-  { label: "Origin", href: "#hero" },
-  { label: "Pathways", href: "#skills" },
-  { label: "Grimoire", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "Draw", href: "/" },
+  { label: "Origin", href: "/home#hero" },
+  { label: "Pathways", href: "/home#skills" },
+  { label: "Grimoire", href: "/home#projects" },
+  { label: "Contact", href: "/home#contact" },
 ];
+
+export const grimoireArcana = [
+  { roman: "0", name: "The Fool", symbol: "/pathways/Fool_Symbol2.webp" },
+  { roman: "I", name: "The Magician", symbol: "/pathways/Error_Symbol2.webp" },
+  { roman: "II", name: "The High Priestess", symbol: "/pathways/Darkness_Symbol2.webp" },
+  { roman: "III", name: "The Empress", symbol: "/pathways/Mother_Symbol2.webp" },
+  { roman: "IV", name: "The Emperor", symbol: "/pathways/Black_Emperor_Symbol2.webp" },
+  { roman: "V", name: "The Hierophant", symbol: "/pathways/White_Tower_Symbol2.webp" },
+  { roman: "VI", name: "The Lovers", symbol: "/pathways/Demoness_Symbol2.webp" },
+  { roman: "VII", name: "The Chariot", symbol: "/pathways/Red_Priest_Symbol2.webp" },
+  { roman: "VIII", name: "Strength", symbol: "/pathways/Twilight_Giant_Symbol2.webp" },
+  { roman: "IX", name: "The Hermit", symbol: "/pathways/Hermit_Symbol2.webp" },
+  { roman: "X", name: "Wheel of Fortune", symbol: "/pathways/Visionary_Symbol2.webp" },
+  { roman: "XI", name: "Justice", symbol: "/pathways/Justiciar_Symbol2.webp" },
+  { roman: "XII", name: "The Hanged Man", symbol: "/pathways/Hanged_Man_Symbol2.webp" },
+  { roman: "XIII", name: "Death", symbol: "/pathways/Death_Symbol2.webp" },
+  { roman: "XIV", name: "Temperance", symbol: "/pathways/Paragon_Symbol2.webp" },
+  { roman: "XV", name: "The Devil", symbol: "/pathways/Abyss_Symbol2.webp" },
+  { roman: "XVI", name: "The Tower", symbol: "/pathways/Tyrant_Symbol2.webp" },
+  { roman: "XVII", name: "The Star", symbol: "/pathways/Sun_Symbol2.webp" },
+  { roman: "XVIII", name: "The Moon", symbol: "/pathways/Moon_Symbol2.webp" },
+  { roman: "XIX", name: "The Sun", symbol: "/pathways/Chained_Symbol2.webp" },
+] as const;
