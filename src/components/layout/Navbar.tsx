@@ -9,6 +9,7 @@ import { usePathway } from "@/components/providers/PathwayProvider";
 import { useActiveSequenceRank } from "@/components/pathway/useActiveSequenceRank";
 import { getSequenceTitle } from "@/lib/pathways";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -39,8 +40,8 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6">
-        <a href="/home#sequence-9" className="group flex items-center gap-2">
-          <Eye className="h-5 w-5 shrink-0 text-accent-violet transition-colors group-hover:text-accent-cyan" />
+        <div className="flex items-center gap-2">
+          <Eye className="h-5 w-5 shrink-0 text-accent-violet" />
           <span className="flex flex-col">
             <span className="font-display text-lg font-bold leading-none tracking-wider">
               {siteConfig.name}
@@ -49,7 +50,7 @@ export function Navbar() {
               {sequenceLabel}
             </span>
           </span>
-        </a>
+        </div>
 
         <ul className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
@@ -64,7 +65,7 @@ export function Navbar() {
           ))}
         </ul>
 
-        <a
+        <Link
           href="/"
           className={cn(
             "hidden rounded border px-4 py-2 font-mono text-xs uppercase tracking-widest transition-all md:block",
@@ -73,8 +74,8 @@ export function Navbar() {
               : "border-accent-amber/40 text-accent-amber hover:border-accent-cyan/50 hover:text-accent-cyan hover:shadow-[0_0_20px_rgba(0,245,212,0.2)]"
           )}
         >
-          Select Pathway
-        </a>
+          Re-select Pathway
+        </Link>
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -106,13 +107,13 @@ export function Navbar() {
                 </li>
               ))}
               <li>
-                <a
+                <Link
                   href="/"
                   onClick={() => setMobileOpen(false)}
                   className="inline-block rounded border border-accent-amber/40 px-4 py-2 font-mono text-xs uppercase tracking-widest text-accent-amber"
                 >
-                  Select Pathway
-                </a>
+                  Re-select Pathway
+                </Link>
               </li>
             </ul>
           </motion.div>

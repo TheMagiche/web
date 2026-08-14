@@ -39,7 +39,7 @@ export function Skills() {
     index === 0
       ? {
           ...pathway,
-          name: `${selected.name} Pathway`,
+          name: `${selected.name} Potion`,
           sequence: `Sequence 0 · ${selected.name}`,
           color: selected.color,
         }

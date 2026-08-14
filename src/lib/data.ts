@@ -27,7 +27,7 @@ export const outsiderSymbols = [
 
 export const pathways = [
   {
-    name: "Seer Pathway",
+    name: "Seer Potion",
     sequence: "Sequence 9 → Sequence 0",
     domain: "Frontend Architecture",
     skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
@@ -35,7 +35,7 @@ export const pathways = [
     symbol: outsiderSymbols[0],
   },
   {
-    name: "Artificer Pathway",
+    name: "Artificer Potion",
     sequence: "Sequence 8 → Sequence 1",
     domain: "Motion & Interaction",
     skills: ["Framer Motion", "GSAP", "Three.js", "WebGL"],
@@ -43,7 +43,7 @@ export const pathways = [
     symbol: outsiderSymbols[1],
   },
   {
-    name: "Hunter Pathway",
+    name: "Hunter Potion",
     sequence: "Sequence 7 → Sequence 2",
     domain: "Performance & Optimization",
     skills: ["Core Web Vitals", "SSR/SSG", "Bundle Analysis", "Caching"],
@@ -51,7 +51,7 @@ export const pathways = [
     symbol: outsiderSymbols[2],
   },
   {
-    name: "Reader Pathway",
+    name: "Reader Potion",
     sequence: "Sequence 6 → Sequence 3",
     domain: "Design Systems",
     skills: ["Component Libraries", "Storybook", "Figma", "Accessibility"],
@@ -62,7 +62,7 @@ export const pathways = [
 
 export const navLinks = [
   { label: "Origin", href: "/home#sequence-7" },
-  { label: "Pathways", href: "/home#sequence-5" },
+  { label: "Potions", href: "/home#sequence-5" },
   { label: "Grimoire", href: "/home#sequence-4" },
   { label: "Contact", href: "/home#sequence-2" },
 ];

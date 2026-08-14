@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { TypewriterText } from "@/components/effects/TypewriterText";
 import { PathwayTarotCard } from "@/components/pathway/PathwayTarotCard";
 import { usePathway } from "@/components/providers/PathwayProvider";
 import { siteConfig } from "@/lib/data";
@@ -81,18 +82,15 @@ export function PathwayDrawing() {
           >
             {siteConfig.name}
           </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mt-5 font-comic text-5xl font-bold leading-[1.05] tracking-wide text-foreground md:text-7xl lg:text-8xl"
+          <TypewriterText
+            text="Become my blessed"
+            delay={500}
+            className="mt-5 font-display text-4xl font-bold tracking-wide text-foreground md:text-6xl lg:text-7xl"
             style={{
               textShadow:
                 "0 0 28px rgba(157, 78, 221, 0.45), 0 0 64px rgba(0, 245, 212, 0.18)",
             }}
-          >
-            Become my blessed
-          </motion.h1>
+          />
           <motion.p
             key={active.id}
             initial={{ opacity: 0, y: 8 }}
