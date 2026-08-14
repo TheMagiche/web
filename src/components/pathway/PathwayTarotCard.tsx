@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { grimoireArcana } from "@/lib/data";
-import type { PathwayChoice } from "@/lib/pathways";
+import { getSequenceStory, type PathwayChoice } from "@/lib/pathways";
 
 const palettes = [
   {
@@ -36,6 +36,7 @@ const palettes = [
 interface PathwayTarotCardProps {
   pathway: PathwayChoice;
   index: number;
+  rank?: number;
   selected?: boolean;
   active?: boolean;
   onSelect?: () => void;
@@ -44,6 +45,7 @@ interface PathwayTarotCardProps {
 export function PathwayTarotCard({
   pathway,
   index,
+  rank,
   selected = false,
   active = false,
   onSelect,
@@ -51,6 +53,7 @@ export function PathwayTarotCard({
   const arcana = grimoireArcana[index % grimoireArcana.length];
   const palette = palettes[index % palettes.length];
   const interactive = Boolean(onSelect);
+  const story = rank != null ? getSequenceStory(rank, pathway) : null;
 
   const face = (
     <div
@@ -83,33 +86,44 @@ export function PathwayTarotCard({
               palette.ink
             )}
           >
-            ✦ {arcana.roman} ✦
+            {story ? `Sequence ${rank}` : `✦ ${arcana.roman} ✦`}
           </p>
           <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.25em] text-muted/70">
-            {arcana.name}
+            {story ? story.tier : arcana.name}
           </p>
         </header>
 
-        <div className="relative mx-6 my-4 flex flex-1 items-center justify-center">
-          <div className="absolute inset-0 rounded-full border border-dashed border-accent-violet/15" />
-          <div className="absolute inset-6 rounded-full border border-accent-amber/10" />
-          <div className="relative z-10 h-40 w-40 overflow-hidden rounded-full">
+        <div className="relative mx-6 my-3 flex flex-1 flex-col items-center justify-center">
+          <div
+            className={
+              story
+                ? "relative z-10 h-28 w-28 overflow-hidden rounded-full sm:h-32 sm:w-32"
+                : "relative z-10 h-40 w-40 overflow-hidden rounded-full"
+            }
+          >
             <Image
               src={pathway.symbol}
               alt=""
               fill
-              sizes="160px"
+              sizes="128px"
               className="object-cover mix-blend-screen"
             />
           </div>
+          {story && (
+            <p className="mt-4 max-h-28 overflow-hidden px-1 text-center text-[11px] leading-relaxed text-muted/90">
+              {story.body}
+            </p>
+          )}
         </div>
 
         <footer className="mx-4 mb-4 rounded-md border border-accent-amber/15 bg-surface-elevated/80 px-4 py-3 text-center">
           <p className="font-display text-xl font-bold tracking-wide">
-            {pathway.name}
+            {story ? story.title : pathway.name}
           </p>
           <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-accent-amber">
-            Sequence 0 · {pathway.name}
+            {story
+              ? `Sequence ${rank} · ${story.title}`
+              : `Sequence 0 · ${pathway.name}`}
           </p>
         </footer>
       </div>
