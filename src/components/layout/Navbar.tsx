@@ -9,9 +9,11 @@ import { useActiveSequenceRank } from "@/components/pathway/useActiveSequenceRan
 import { getSequenceTitle } from "@/lib/pathways";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
 
 export function Navbar() {
+  const pathname = usePathname();
   const { selected, highlighted } = usePathway();
   const { theme } = usePathwayTheme();
   const activeRank = useActiveSequenceRank();
@@ -27,6 +29,8 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  if (pathname === "/") return null;
 
   return (
     <motion.header

@@ -8,8 +8,14 @@ function getIntro() {
     intro = new Audio("/sound/intro.mp3");
     intro.loop = false;
     intro.volume = 0.45;
+    intro.preload = "auto";
+    intro.load();
   }
   return intro;
+}
+
+export function preloadIntro() {
+  getIntro();
 }
 
 function getMain() {
@@ -35,8 +41,13 @@ export function playPaperSlide() {
 
 export function startIntro() {
   const audio = getIntro();
-  if (!audio || !audio.paused || audio.ended) return;
-  void audio.play().catch(() => {});
+  if (!audio) return Promise.resolve(false);
+  if (!audio.paused && !audio.ended) return Promise.resolve(true);
+  audio.currentTime = 0;
+  return audio
+    .play()
+    .then(() => true)
+    .catch(() => false);
 }
 
 export function stopIntro() {

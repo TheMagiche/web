@@ -13,6 +13,7 @@ interface PathwayTarotCardProps {
   rank?: number;
   selected?: boolean;
   active?: boolean;
+  compact?: boolean;
   onSelect?: () => void;
 }
 
@@ -22,6 +23,7 @@ export function PathwayTarotCard({
   rank,
   selected = false,
   active = false,
+  compact = false,
   onSelect,
 }: PathwayTarotCardProps) {
   const arcana = grimoireArcana[index % grimoireArcana.length];
@@ -32,7 +34,10 @@ export function PathwayTarotCard({
   const face = (
     <div
       className={cn(
-        "relative h-112 w-68 overflow-hidden rounded-xl border-2 bg-linear-to-b p-1.75 transition-shadow duration-500 sm:h-128 sm:w-76",
+        "relative overflow-hidden rounded-xl border-2 bg-linear-to-b p-1.75 transition-shadow duration-500",
+        compact
+          ? "h-72 w-44 sm:h-80 sm:w-48"
+          : "h-112 w-68 sm:h-128 sm:w-76",
         theme.cardBorder,
         theme.cardGradient,
         theme.cardGlow,
@@ -53,10 +58,11 @@ export function PathwayTarotCard({
           ⌟
         </span>
 
-        <header className="px-5 pt-6 text-center">
+        <header className={cn("text-center", compact ? "px-3 pt-4" : "px-5 pt-6")}>
           <p
             className={cn(
-              "font-display text-sm tracking-[0.35em]",
+              "font-display tracking-[0.35em]",
+              compact ? "text-xs" : "text-sm",
               theme.text
             )}
           >
@@ -67,12 +73,19 @@ export function PathwayTarotCard({
           </p>
         </header>
 
-        <div className="relative mx-6 my-3 flex flex-1 flex-col items-center justify-center">
+        <div
+          className={cn(
+            "relative flex flex-1 flex-col items-center justify-center",
+            compact ? "mx-4 my-2" : "mx-6 my-3"
+          )}
+        >
           <div
             className={
               story
                 ? "relative z-10 h-28 w-28 overflow-hidden rounded-full sm:h-32 sm:w-32"
-                : "relative z-10 h-40 w-40 overflow-hidden rounded-full"
+                : compact
+                  ? "relative z-10 h-24 w-24 overflow-hidden rounded-full sm:h-28 sm:w-28"
+                  : "relative z-10 h-40 w-40 overflow-hidden rounded-full"
             }
           >
             <Image
@@ -90,15 +103,19 @@ export function PathwayTarotCard({
           )}
         </div>
 
-        <footer className={cn("mx-4 mb-4 rounded-md border bg-surface-elevated/80 px-4 py-3 text-center", theme.borderSoft)}>
-          <p className="font-display text-xl font-bold tracking-wide">
+        <footer className={cn(
+          "rounded-md border bg-surface-elevated/80 text-center",
+          compact ? "mx-3 mb-3 px-3 py-2" : "mx-4 mb-4 px-4 py-3",
+          theme.borderSoft
+        )}>
+          <p className={cn("font-display font-bold tracking-wide", compact ? "text-base" : "text-xl")}>
             {story ? story.title : pathway.name}
           </p>
-          <p className={cn("mt-1 font-mono text-[10px] uppercase tracking-widest", theme.text)}>
+          {/* <p className={cn("mt-1 font-mono text-[10px] uppercase tracking-widest", theme.text)}>
             {story
               ? `Sequence ${rank} · ${story.title}`
               : `Sequence 0 · ${pathway.name}`}
-          </p>
+          </p> */}
         </footer>
       </div>
     </div>

@@ -77,97 +77,101 @@ export function PathwayDrawing() {
   };
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden py-16 pt-28">
+    <section className="relative flex h-screen flex-col overflow-hidden px-6 py-5">
       <div className="absolute inset-0 grid-bg opacity-20" />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-6 lg:grid-cols-[minmax(22rem,40rem)_1fr] lg:gap-10">
-        <header className="text-left">
-          <motion.p
-            key={`${active.id}-kicker`}
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={cn(
-              "font-mono text-xs uppercase tracking-[0.45em] transition-colors",
-              theme.text
-            )}
-          >
-            {siteConfig.name}
-          </motion.p>
-          <TypewriterText
-            text="Become my blessed"
-            delay={500}
-            className="mt-5 font-display text-4xl font-bold tracking-wide text-foreground md:text-6xl lg:text-7xl"
-            style={{ textShadow: theme.titleShadow }}
-          />
-          <motion.p
-            key={active.id}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-5 text-sm leading-relaxed text-muted md:text-base"
-          >
-            {active.description}
-          </motion.p>
-          <p
-            className={cn(
-              "mt-4 font-mono text-[10px] uppercase tracking-[0.3em] transition-colors",
-              theme.text
-            )}
-          >
-            Sequence 0 · {active.name}
-            {hasChosen && selected.id === active.id ? " · Drawn" : ""}
-          </p>
-          <button
-            type="button"
-            onClick={() => handleSelect(active.id)}
-            className={cn(
-              "mt-8 rounded border px-6 py-3 font-mono text-xs uppercase tracking-widest transition-all",
-              theme.border,
-              theme.bg,
-              theme.text,
-              theme.borderHover,
-              theme.bgHover,
-              theme.buttonGlow
-            )}
-          >
-            Draw this card
-          </button>
-        </header>
-
-        <div
-          className="relative flex h-120ms-center justify-center sm:h-136"
-          onPointerDown={onPointerDown}
-          onPointerUp={onPointerUp}
-        >
-          {previous && (
-            <div className="pointer-events-auto absolute left-0 z-0 origin-center translate-x-[-35%] scale-[0.72] opacity-40 transition-all duration-300 hover:opacity-60">
-              <PathwayTarotCard
-                pathway={previous}
-                index={activeIndex - 1}
-                onSelect={() => goToIndex(activeIndex - 1)}
-              />
-            </div>
+      <header className="relative z-10 mx-auto w-full max-w-3xl shrink-0 text-center">
+        <motion.p
+          key={`${active.id}-kicker`}
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={cn(
+            "font-mono text-[10px] uppercase tracking-[0.45em] transition-colors md:text-xs",
+            theme.text
           )}
+        >
+          {siteConfig.name}
+        </motion.p>
+        <TypewriterText
+          text="Become my blessed"
+          playIntro
+          className="mt-2 font-display text-2xl font-bold tracking-wide text-foreground md:text-3xl lg:text-4xl"
+          style={{ textShadow: theme.titleShadow }}
+        />
+        <motion.p
+          key={active.id}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mx-auto mt-2 max-w-xl text-xs leading-relaxed text-muted md:text-sm"
+        >
+          {active.description}
+        </motion.p>
+        <p
+          className={cn(
+            "mt-2 font-mono text-[10px] uppercase tracking-[0.3em] transition-colors",
+            theme.text
+          )}
+        >
+          Sequence 0 · {active.name}
+          {hasChosen && selected.id === active.id ? " · Drawn" : ""}
+        </p>
+      </header>
 
-          <div className="relative z-10">
+      <div
+        className="relative z-10 mx-auto flex w-full max-w-4xl min-h-0 flex-1 items-center justify-center"
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+      >
+        {previous && (
+          <div className="pointer-events-auto absolute left-0 z-0 origin-center translate-x-[-18%] scale-[0.72] opacity-40 transition-all duration-300 hover:opacity-60 sm:translate-x-[-8%]">
             <PathwayTarotCard
-              pathway={active}
-              index={activeIndex}
-              active
-              selected={selected.id === active.id && hasChosen}
-              onSelect={() => handleSelect(active.id)}
+              pathway={previous}
+              index={activeIndex - 1}
+              compact
+              onSelect={() => goToIndex(activeIndex - 1)}
             />
           </div>
+        )}
 
-          {next && (
-            <div className="pointer-events-auto absolute right-0 z-0 origin-center translate-x-[35%] scale-[0.72] opacity-40 transition-all duration-300 hover:opacity-60">
-              <PathwayTarotCard
-                pathway={next}
-                index={activeIndex + 1}
-                onSelect={() => goToIndex(activeIndex + 1)}
-              />
-            </div>
-          )}
+        <div className="relative z-10">
+          <PathwayTarotCard
+            pathway={active}
+            index={activeIndex}
+            compact
+            active
+            selected={selected.id === active.id && hasChosen}
+            onSelect={() => handleSelect(active.id)}
+          />
         </div>
+
+        {next && (
+          <div className="pointer-events-auto absolute right-0 z-0 origin-center translate-x-[18%] scale-[0.72] opacity-40 transition-all duration-300 hover:opacity-60 sm:translate-x-[8%]">
+            <PathwayTarotCard
+              pathway={next}
+              index={activeIndex + 1}
+              compact
+              onSelect={() => goToIndex(activeIndex + 1)}
+            />
+          </div>
+        )}
+      </div>
+
+      <div className="relative z-10 mx-auto w-full max-w-3xl shrink-0 pt-2 text-center">
+        <button
+          type="button"
+          onClick={() => handleSelect(active.id)}
+          className={cn(
+            "rounded border px-6 py-2.5 font-mono text-xs uppercase tracking-widest transition-all",
+            theme.border,
+            theme.bg,
+            theme.text,
+            theme.borderHover,
+            theme.bgHover,
+            theme.buttonGlow
+          )}
+        >
+          Draw this card
+        </button>
       </div>
     </section>
   );
