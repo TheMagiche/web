@@ -9,6 +9,7 @@ import { usePathway } from "@/components/providers/PathwayProvider";
 import { siteConfig } from "@/lib/data";
 import { getPathwayTheme } from "@/lib/pathwayTheme";
 import { pathwayChoices } from "@/lib/pathways";
+import { playPaperSlide } from "@/lib/sound";
 import { cn } from "@/lib/utils";
 
 export function PathwayDrawing() {
@@ -24,13 +25,16 @@ export function PathwayDrawing() {
 
   const goToIndex = useCallback((index: number) => {
     const next = Math.max(0, Math.min(pathwayChoices.length - 1, index));
+    if (next === activeIndex) return;
+    playPaperSlide();
     setActiveIndex(next);
     const pathway = pathwayChoices[next];
     if (pathway) highlightPathway(pathway.id);
-  }, [highlightPathway]);
+  }, [activeIndex, highlightPathway]);
 
   const handleSelect = useCallback(
     (id: string) => {
+      playPaperSlide();
       selectPathway(id);
       router.push("/home");
     },

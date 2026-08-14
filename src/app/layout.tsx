@@ -3,6 +3,7 @@ import { Cinzel, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { PathwayProvider } from "@/components/providers/PathwayProvider";
 import { SceneBackground } from "@/components/effects/SceneBackground";
 import { ParticleBackground } from "@/components/effects/ParticleBackground";
+import { BackgroundAudio } from "@/components/effects/BackgroundAudio";
 import { Navbar } from "@/components/layout/Navbar";
 import "./globals.css";
 
@@ -51,6 +52,7 @@ export default function RootLayout({
         <PathwayProvider>
           <SceneBackground />
           <ParticleBackground />
+          <BackgroundAudio />
           <Navbar />
           {children}
         </PathwayProvider>
