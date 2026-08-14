@@ -41,14 +41,14 @@ export function TarotCard({ project, index }: TarotCardProps) {
   return (
     <article
       className={cn(
-        "group relative h-[460px] w-[280px] transition-transform duration-500",
+        "group relative h-115 w-70 transition-transform duration-500",
         index % 2 === 0 ? "rotate-1 hover:rotate-0" : "-rotate-1 hover:rotate-0",
         "hover:-translate-y-3"
       )}
     >
       <div
         className={cn(
-          "relative h-full overflow-hidden rounded-xl border-2 bg-gradient-to-b p-[7px] transition-shadow duration-500",
+          "relative h-full overflow-hidden rounded-xl border-2 bg-linear-to-b p-1.75 transition-shadow duration-500",
           project.border,
           project.gradient,
           glowShadow[project.glow]

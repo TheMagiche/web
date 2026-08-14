@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { GitHubIcon } from "@/components/ui/SocialIcons";
 import { TarotCard } from "@/components/ui/TarotCard";
 import { siteConfig } from "@/lib/data";
+import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
+import { cn } from "@/lib/utils";
 import type { GithubProject } from "@/lib/github";
 
 interface ProjectsProps {
@@ -13,6 +15,7 @@ interface ProjectsProps {
 
 export function Projects({ projects }: ProjectsProps) {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const { theme } = usePathwayTheme();
 
   useEffect(() => {
     const el = scrollerRef.current;
@@ -63,7 +66,11 @@ export function Projects({ projects }: ProjectsProps) {
             href={siteConfig.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-accent-cyan transition-colors hover:text-accent-violet"
+            className={cn(
+              "mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest transition-colors",
+              theme.text,
+              theme.hoverText
+            )}
           >
             <GitHubIcon className="h-4 w-4" />
             github.com/{siteConfig.githubUsername}
@@ -108,7 +115,13 @@ export function Projects({ projects }: ProjectsProps) {
           href={siteConfig.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded border border-border px-6 py-3 font-mono text-xs uppercase tracking-widest text-muted transition-all hover:border-accent-violet/40 hover:text-accent-cyan"
+          className={cn(
+            "inline-flex items-center gap-2 rounded border px-6 py-3 font-mono text-xs uppercase tracking-widest transition-all",
+            theme.border,
+            theme.text,
+            theme.borderHover,
+            theme.buttonGlow
+          )}
         >
           <GitHubIcon className="h-4 w-4" />
           All repositories on GitHub

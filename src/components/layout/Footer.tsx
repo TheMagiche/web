@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { siteConfig } from "@/lib/data";
 import { usePathway } from "@/components/providers/PathwayProvider";
+import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
+import { cn } from "@/lib/utils";
 import {
   GitHubIcon,
   LinkedInIcon,
@@ -17,6 +19,7 @@ const socialLinks = [
 
 export function Footer() {
   const { selected } = usePathway();
+  const { theme } = usePathwayTheme();
 
   return (
     <footer className="relative border-t border-border bg-surface/50 py-12">
@@ -36,7 +39,11 @@ export function Footer() {
             </p>
             <a
               href="/"
-              className="mt-4 inline-block font-mono text-[10px] uppercase tracking-[0.28em] text-accent-amber transition-colors hover:text-accent-cyan"
+              className={cn(
+                "mt-4 inline-block font-mono text-[10px] uppercase tracking-[0.28em] transition-colors",
+                theme.text,
+                theme.hoverText
+              )}
             >
               Reselect Pathway
             </a>
@@ -50,7 +57,10 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="text-muted transition-colors hover:text-accent-cyan"
+                className={cn(
+                  "text-muted transition-colors",
+                  theme.hoverText
+                )}
               >
                 <Icon className="h-5 w-5" />
               </a>

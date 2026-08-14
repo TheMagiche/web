@@ -1,21 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { getPathwayTheme } from "@/lib/pathwayTheme";
+import type { PathwayColor } from "@/lib/pathways";
 import { cn } from "@/lib/utils";
 
 interface MysticalCardProps {
   children: React.ReactNode;
   className?: string;
-  glowColor?: "violet" | "cyan" | "amber" | "rose";
+  glowColor?: PathwayColor;
   delay?: number;
 }
-
-const glowMap = {
-  violet: "hover:shadow-[0_0_30px_rgba(157,78,221,0.3)] hover:border-violet-500/40",
-  cyan: "hover:shadow-[0_0_30px_rgba(0,245,212,0.3)] hover:border-cyan-500/40",
-  amber: "hover:shadow-[0_0_30px_rgba(240,165,0,0.3)] hover:border-amber-500/40",
-  rose: "hover:shadow-[0_0_30px_rgba(255,0,110,0.3)] hover:border-rose-500/40",
-};
 
 export function MysticalCard({
   children,
@@ -23,6 +18,8 @@ export function MysticalCard({
   glowColor = "violet",
   delay = 0,
 }: MysticalCardProps) {
+  const theme = getPathwayTheme(glowColor);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -32,7 +29,7 @@ export function MysticalCard({
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className={cn(
         "glass relative overflow-hidden rounded-lg border border-border p-6 transition-all duration-300",
-        glowMap[glowColor],
+        theme.hoverGlow,
         className
       )}
     >

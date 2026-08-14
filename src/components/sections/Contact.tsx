@@ -4,9 +4,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Mail, MapPin } from "lucide-react";
 import { siteConfig } from "@/lib/data";
+import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
+import { cn } from "@/lib/utils";
 
 export function Contact() {
   const [sent, setSent] = useState(false);
+  const { theme } = usePathwayTheme();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,8 +26,8 @@ export function Contact() {
             className="space-y-6 md:col-span-2"
           >
             <div className="flex items-center gap-3">
-              <div className="rounded border border-accent-cyan/20 bg-accent-cyan/10 p-2">
-                <Mail className="h-4 w-4 text-accent-cyan" />
+              <div className={cn("rounded border p-2", theme.borderSoft, theme.bg)}>
+                <Mail className={cn("h-4 w-4", theme.text)} />
               </div>
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-widest text-muted">
@@ -32,7 +35,7 @@ export function Contact() {
                 </p>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="text-sm transition-colors hover:text-accent-cyan"
+                  className={cn("text-sm transition-colors", theme.hoverText)}
                 >
                   {siteConfig.email}
                 </a>
@@ -40,8 +43,8 @@ export function Contact() {
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="rounded border border-accent-violet/20 bg-accent-violet/10 p-2">
-                <MapPin className="h-4 w-4 text-accent-violet" />
+              <div className={cn("rounded border p-2", theme.borderSoft, theme.bg)}>
+                <MapPin className={cn("h-4 w-4", theme.text)} />
               </div>
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-widest text-muted">
@@ -53,13 +56,13 @@ export function Contact() {
 
             <div className="glass rounded-lg p-4">
               <p className="font-mono text-xs leading-relaxed text-muted/70">
-                <span className="text-accent-amber">&gt;</span> Status:{" "}
-                <span className="text-accent-cyan">Open to opportunities</span>
+                <span className={theme.text}>&gt;</span> Status:{" "}
+                <span className={theme.text}>Open to opportunities</span>
                 <br />
-                <span className="text-accent-amber">&gt;</span> Response time:{" "}
+                <span className={theme.text}>&gt;</span> Response time:{" "}
                 <span className="text-foreground">Within 24 hours</span>
                 <br />
-                <span className="text-accent-amber">&gt;</span> Specialization:{" "}
+                <span className={theme.text}>&gt;</span> Specialization:{" "}
                 <span className="text-foreground">Frontend · UI/UX · Motion</span>
               </p>
             </div>
@@ -80,7 +83,10 @@ export function Contact() {
                 type="text"
                 required
                 placeholder="Seeker of code..."
-                className="w-full rounded border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted/40 outline-none transition-colors focus:border-accent-violet/50 focus:shadow-[0_0_15px_rgba(157,78,221,0.15)]"
+                className={cn(
+                  "w-full rounded border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted/40 outline-none transition-colors",
+                  theme.focus
+                )}
               />
             </div>
             <div>
@@ -91,7 +97,10 @@ export function Contact() {
                 type="email"
                 required
                 placeholder="you@realm.com"
-                className="w-full rounded border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted/40 outline-none transition-colors focus:border-accent-violet/50 focus:shadow-[0_0_15px_rgba(157,78,221,0.15)]"
+                className={cn(
+                  "w-full rounded border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted/40 outline-none transition-colors",
+                  theme.focus
+                )}
               />
             </div>
             <div>
@@ -102,15 +111,26 @@ export function Contact() {
                 required
                 rows={4}
                 placeholder="Describe the mystery you'd like solved..."
-                className="w-full resize-none rounded border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted/40 outline-none transition-colors focus:border-accent-violet/50 focus:shadow-[0_0_15px_rgba(157,78,221,0.15)]"
+                className={cn(
+                  "w-full resize-none rounded border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted/40 outline-none transition-colors",
+                  theme.focus
+                )}
               />
             </div>
             <button
               type="submit"
-              className="group flex w-full items-center justify-center gap-2 rounded border border-accent-violet/40 bg-accent-violet/10 py-3 font-mono text-sm uppercase tracking-widest text-accent-violet transition-all hover:border-accent-cyan/50 hover:bg-accent-cyan/10 hover:text-accent-cyan hover:shadow-[0_0_25px_rgba(0,245,212,0.2)]"
+              className={cn(
+                "group flex w-full items-center justify-center gap-2 rounded border py-3 font-mono text-sm uppercase tracking-widest transition-all",
+                theme.border,
+                theme.bg,
+                theme.text,
+                theme.borderHover,
+                theme.bgHover,
+                theme.buttonGlow
+              )}
             >
               {sent ? (
-                <span className="text-accent-cyan">Whisper Sent ✦</span>
+                <span>Whisper Sent ✦</span>
               ) : (
                 <>
                   <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />

@@ -25,9 +25,9 @@ export const outsiderSymbols = [
   "/outsider/Chaos_Primogenitor_Symbol2.webp",
 ] as const;
 
-export const pathways = [
+export const potions = [
   {
-    name: "Seer Potion",
+    name: "Codex Potion",
     sequence: "Sequence 9 → Sequence 0",
     domain: "Frontend Architecture",
     skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
@@ -35,7 +35,7 @@ export const pathways = [
     symbol: outsiderSymbols[0],
   },
   {
-    name: "Artificer Potion",
+    name: "Fluidity Potion",
     sequence: "Sequence 8 → Sequence 1",
     domain: "Motion & Interaction",
     skills: ["Framer Motion", "GSAP", "Three.js", "WebGL"],
@@ -43,7 +43,7 @@ export const pathways = [
     symbol: outsiderSymbols[1],
   },
   {
-    name: "Hunter Potion",
+    name: "Optimizer Potion",
     sequence: "Sequence 7 → Sequence 2",
     domain: "Performance & Optimization",
     skills: ["Core Web Vitals", "SSR/SSG", "Bundle Analysis", "Caching"],
@@ -51,7 +51,7 @@ export const pathways = [
     symbol: outsiderSymbols[2],
   },
   {
-    name: "Reader Potion",
+    name: "Designer Potion",
     sequence: "Sequence 6 → Sequence 3",
     domain: "Design Systems",
     skills: ["Component Libraries", "Storybook", "Figma", "Accessibility"],
@@ -78,7 +78,7 @@ export const grimoireArcana = [
   { roman: "VII", name: "The Chariot", symbol: "/pathways/Red_Priest_Symbol2.webp" },
   { roman: "VIII", name: "Strength", symbol: "/pathways/Twilight_Giant_Symbol2.webp" },
   { roman: "IX", name: "The Hermit", symbol: "/pathways/Hermit_Symbol2.webp" },
-  { roman: "X", name: "Wheel of Fortune", symbol: "/pathways/Visionary_Symbol2.webp" },
+  { roman: "X", name: "Wheel of Fortune", symbol: "/pathways/Wheel_of_Fortune_Symbol2.webp" },
   { roman: "XI", name: "Justice", symbol: "/pathways/Justiciar_Symbol2.webp" },
   { roman: "XII", name: "The Hanged Man", symbol: "/pathways/Hanged_Man_Symbol2.webp" },
   { roman: "XIII", name: "Death", symbol: "/pathways/Death_Symbol2.webp" },
@@ -89,4 +89,5 @@ export const grimoireArcana = [
   { roman: "XVIII", name: "The Moon", symbol: "/pathways/Moon_Symbol2.webp" },
   { roman: "XIX", name: "The Sun", symbol: "/pathways/Chained_Symbol2.webp" },
   { roman: "XX", name: "Judgement", symbol: "/pathways/Error_Symbol2.webp" },
+  { roman: "XXI", name: "The World", symbol: "/pathways/Visionary_Symbol2.webp" },
 ] as const;

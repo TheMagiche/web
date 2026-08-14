@@ -7,7 +7,9 @@ import { TypewriterText } from "@/components/effects/TypewriterText";
 import { PathwayTarotCard } from "@/components/pathway/PathwayTarotCard";
 import { usePathway } from "@/components/providers/PathwayProvider";
 import { siteConfig } from "@/lib/data";
+import { getPathwayTheme } from "@/lib/pathwayTheme";
 import { pathwayChoices } from "@/lib/pathways";
+import { cn } from "@/lib/utils";
 
 export function PathwayDrawing() {
   const router = useRouter();
@@ -18,6 +20,7 @@ export function PathwayDrawing() {
   const active = pathwayChoices[activeIndex] ?? pathwayChoices[0];
   const previous = pathwayChoices[activeIndex - 1];
   const next = pathwayChoices[activeIndex + 1];
+  const theme = getPathwayTheme(active.color);
 
   const goToIndex = useCallback((index: number) => {
     const next = Math.max(0, Math.min(pathwayChoices.length - 1, index));
@@ -76,9 +79,13 @@ export function PathwayDrawing() {
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-6 lg:grid-cols-[minmax(22rem,40rem)_1fr] lg:gap-10">
         <header className="text-left">
           <motion.p
+            key={`${active.id}-kicker`}
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-mono text-xs uppercase tracking-[0.45em] text-accent-cyan"
+            className={cn(
+              "font-mono text-xs uppercase tracking-[0.45em] transition-colors",
+              theme.text
+            )}
           >
             {siteConfig.name}
           </motion.p>
@@ -86,10 +93,7 @@ export function PathwayDrawing() {
             text="Become my blessed"
             delay={500}
             className="mt-5 font-display text-4xl font-bold tracking-wide text-foreground md:text-6xl lg:text-7xl"
-            style={{
-              textShadow:
-                "0 0 28px rgba(157, 78, 221, 0.45), 0 0 64px rgba(0, 245, 212, 0.18)",
-            }}
+            style={{ textShadow: theme.titleShadow }}
           />
           <motion.p
             key={active.id}
@@ -99,14 +103,27 @@ export function PathwayDrawing() {
           >
             {active.description}
           </motion.p>
-          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent-amber">
+          <p
+            className={cn(
+              "mt-4 font-mono text-[10px] uppercase tracking-[0.3em] transition-colors",
+              theme.text
+            )}
+          >
             Sequence 0 · {active.name}
             {hasChosen && selected.id === active.id ? " · Drawn" : ""}
           </p>
           <button
             type="button"
             onClick={() => handleSelect(active.id)}
-            className="mt-8 rounded border border-accent-violet/40 bg-accent-violet/10 px-6 py-3 font-mono text-xs uppercase tracking-widest text-accent-violet transition-all hover:border-accent-cyan/50 hover:bg-accent-cyan/10 hover:text-accent-cyan"
+            className={cn(
+              "mt-8 rounded border px-6 py-3 font-mono text-xs uppercase tracking-widest transition-all",
+              theme.border,
+              theme.bg,
+              theme.text,
+              theme.borderHover,
+              theme.bgHover,
+              theme.buttonGlow
+            )}
           >
             Draw this card
           </button>

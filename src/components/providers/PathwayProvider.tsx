@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { usePathname } from "next/navigation";
 import {
   defaultPathway,
   pathwayChoices,
@@ -28,11 +29,20 @@ type PathwayContextValue = {
 const PathwayContext = createContext<PathwayContextValue | null>(null);
 
 export function PathwayProvider({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
   const [selected, setSelected] = useState<PathwayChoice>(defaultPathway);
   const [highlighted, setHighlighted] = useState<PathwayChoice>(defaultPathway);
   const [hasChosen, setHasChosen] = useState(false);
 
   useEffect(() => {
+    if (pathname === "/") {
+      setSelected(defaultPathway);
+      setHighlighted(defaultPathway);
+      setHasChosen(false);
+      window.localStorage.removeItem(STORAGE_KEY);
+      return;
+    }
+
     const stored = window.localStorage.getItem(STORAGE_KEY);
     const match = pathwayChoices.find((pathway) => pathway.id === stored);
     if (match) {
@@ -40,7 +50,7 @@ export function PathwayProvider({ children }: { children: ReactNode }) {
       setHighlighted(match);
       setHasChosen(true);
     }
-  }, []);
+  }, [pathname]);
 
   const selectPathway = useCallback((id: string) => {
     const match = pathwayChoices.find((pathway) => pathway.id === id);

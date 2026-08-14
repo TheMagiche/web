@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Eye } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/data";
@@ -10,14 +9,14 @@ import { useActiveSequenceRank } from "@/components/pathway/useActiveSequenceRan
 import { getSequenceTitle } from "@/lib/pathways";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
 
 export function Navbar() {
-  const pathname = usePathname();
   const { selected, highlighted } = usePathway();
+  const { theme } = usePathwayTheme();
   const activeRank = useActiveSequenceRank();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const onLanding = pathname === "/";
   const sequenceLabel =
     activeRank != null
       ? `Sequence ${activeRank} · ${getSequenceTitle(selected, activeRank)}`
@@ -41,12 +40,17 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6">
         <div className="flex items-center gap-2">
-          <Eye className="h-5 w-5 shrink-0 text-accent-violet" />
+          <Eye className={cn("h-5 w-5 shrink-0 transition-colors", theme.text)} />
           <span className="flex flex-col">
             <span className="font-display text-lg font-bold leading-none tracking-wider">
               {siteConfig.name}
             </span>
-            <span className="mt-1 font-mono text-[9px] uppercase tracking-[0.28em] text-accent-amber">
+            <span
+              className={cn(
+                "mt-1 font-mono text-[9px] uppercase tracking-[0.28em] transition-colors",
+                theme.text
+              )}
+            >
               {sequenceLabel}
             </span>
           </span>
@@ -57,7 +61,10 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="font-mono text-sm uppercase tracking-widest text-muted transition-colors hover:text-accent-cyan"
+                className={cn(
+                  "font-mono text-sm uppercase tracking-widest text-muted transition-colors",
+                  theme.hoverText
+                )}
               >
                 {link.label}
               </a>
@@ -69,9 +76,10 @@ export function Navbar() {
           href="/"
           className={cn(
             "hidden rounded border px-4 py-2 font-mono text-xs uppercase tracking-widest transition-all md:block",
-            onLanding
-              ? "border-accent-cyan/50 text-accent-cyan"
-              : "border-accent-amber/40 text-accent-amber hover:border-accent-cyan/50 hover:text-accent-cyan hover:shadow-[0_0_20px_rgba(0,245,212,0.2)]"
+            theme.border,
+            theme.text,
+            theme.borderHover,
+            theme.buttonGlow
           )}
         >
           Re-select Pathway
@@ -100,7 +108,10 @@ export function Navbar() {
                   <a
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="font-mono text-sm uppercase tracking-widest text-muted transition-colors hover:text-accent-cyan"
+                    className={cn(
+                      "font-mono text-sm uppercase tracking-widest text-muted transition-colors",
+                      theme.hoverText
+                    )}
                   >
                     {link.label}
                   </a>
@@ -110,7 +121,11 @@ export function Navbar() {
                 <Link
                   href="/"
                   onClick={() => setMobileOpen(false)}
-                  className="inline-block rounded border border-accent-amber/40 px-4 py-2 font-mono text-xs uppercase tracking-widest text-accent-amber"
+                  className={cn(
+                    "inline-block rounded border px-4 py-2 font-mono text-xs uppercase tracking-widest",
+                    theme.border,
+                    theme.text
+                  )}
                 >
                   Re-select Pathway
                 </Link>

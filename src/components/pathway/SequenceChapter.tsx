@@ -7,6 +7,7 @@ import { PathwayTarotCard } from "@/components/pathway/PathwayTarotCard";
 import { usePathway } from "@/components/providers/PathwayProvider";
 import { getDeveloperCopy } from "@/lib/developerJourney";
 import { getSequenceStory, pathwayChoices } from "@/lib/pathways";
+import { getPathwayTheme } from "@/lib/pathwayTheme";
 import { cn } from "@/lib/utils";
 
 export type CardPlacement = "right" | "left" | "top";
@@ -30,6 +31,7 @@ export function SequenceChapter({
   bleed = false,
 }: SequenceChapterProps) {
   const { selected } = usePathway();
+  const theme = getPathwayTheme(selected.color);
   const copy = getDeveloperCopy(rank);
   const story = getSequenceStory(rank, selected);
   const placement = getCardPlacement(rank);
@@ -45,7 +47,10 @@ export function SequenceChapter({
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        className="font-mono text-xs uppercase tracking-[0.4em] text-accent-cyan"
+        className={cn(
+          "font-mono text-xs uppercase tracking-[0.4em]",
+          theme.text
+        )}
       >
         Sequence {rank} · {story.tier}
       </motion.p>
@@ -57,7 +62,7 @@ export function SequenceChapter({
       >
         <Heading
           className={cn(
-            "mt-4 font-display font-bold tracking-wide",
+            "mt-4 font-display font-bold tracking-wide text-foreground",
             rank === 9
               ? "text-4xl md:text-6xl lg:text-7xl"
               : "text-4xl md:text-5xl lg:text-6xl"
@@ -92,7 +97,7 @@ export function SequenceChapter({
 
   const card = (
     <motion.div
-      className="flex shrink-0 justify-center [perspective:1400px]"
+      className="flex shrink-0 justify-center perspective-[1400px]"
       initial={
         placement === "left"
           ? { opacity: 0, rotateY: 0, scale: 0.92 }
@@ -136,13 +141,19 @@ export function SequenceChapter({
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="absolute h-64 w-64 rounded-full bg-accent-violet/10 blur-[100px] animate-pulse-glow"
+            className={cn(
+              "absolute h-64 w-64 rounded-full blur-[100px] animate-pulse-glow",
+              theme.orb
+            )}
           />
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            className="absolute h-48 w-48 translate-x-32 translate-y-16 rounded-full bg-accent-cyan/10 blur-[80px] animate-pulse-glow"
+            className={cn(
+              "absolute h-48 w-48 translate-x-32 translate-y-16 rounded-full blur-[80px] animate-pulse-glow",
+              theme.orb
+            )}
           />
         </>
       )}

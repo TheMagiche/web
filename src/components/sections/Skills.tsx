@@ -3,63 +3,30 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { MysticalCard } from "@/components/ui/MysticalCard";
-import { pathways } from "@/lib/data";
-import { usePathway } from "@/components/providers/PathwayProvider";
-
-const colorMap = {
-  violet: {
-    text: "text-accent-violet",
-    bg: "bg-accent-violet/10",
-    border: "border-accent-violet/20",
-    tag: "border-accent-violet/20 text-accent-violet",
-  },
-  cyan: {
-    text: "text-accent-cyan",
-    bg: "bg-accent-cyan/10",
-    border: "border-accent-cyan/20",
-    tag: "border-accent-cyan/20 text-accent-cyan",
-  },
-  amber: {
-    text: "text-accent-amber",
-    bg: "bg-accent-amber/10",
-    border: "border-accent-amber/20",
-    tag: "border-accent-amber/20 text-accent-amber",
-  },
-  rose: {
-    text: "text-accent-rose",
-    bg: "bg-accent-rose/10",
-    border: "border-accent-rose/20",
-    tag: "border-accent-rose/20 text-accent-rose",
-  },
-};
+import { potions as displayedPotions } from "@/lib/data";
+import { getPathwayTheme } from "@/lib/pathwayTheme";
+import type { PathwayColor } from "@/lib/pathways";
+import { cn } from "@/lib/utils";
 
 export function Skills() {
-  const { selected } = usePathway();
-  const displayedPathways = pathways.map((pathway, index) =>
-    index === 0
-      ? {
-          ...pathway,
-          name: `${selected.name} Potion`,
-          sequence: `Sequence 0 · ${selected.name}`,
-          color: selected.color,
-        }
-      : pathway
-  );
-
   return (
     <div className="grid gap-6 md:grid-cols-2">
-          {displayedPathways.map((pathway, i) => {
-            const colors = colorMap[pathway.color as keyof typeof colorMap];
+          {displayedPotions.map((pathway, i) => {
+            const theme = getPathwayTheme(pathway.color as PathwayColor);
 
             return (
               <MysticalCard
                 key={pathway.name}
-                glowColor={pathway.color as "violet" | "cyan" | "amber" | "rose"}
+                glowColor={pathway.color as PathwayColor}
                 delay={i * 0.1}
               >
                 <div className="flex items-start justify-between">
                   <div
-                    className={`relative h-16 w-16 overflow-hidden rounded-full border ${colors.border} ${colors.bg}`}
+                    className={cn(
+                      "relative h-16 w-16 overflow-hidden rounded-full border",
+                      theme.borderSoft,
+                      theme.bg
+                    )}
                   >
                     <Image
                       src={pathway.symbol}
@@ -77,7 +44,7 @@ export function Skills() {
                 <h3 className="mt-4 font-display text-xl font-bold tracking-wide">
                   {pathway.name}
                 </h3>
-                <p className={`mt-1 text-sm font-mono ${colors.text}`}>
+                <p className={cn("mt-1 text-sm font-mono", theme.text)}>
                   {pathway.domain}
                 </p>
 
@@ -86,7 +53,11 @@ export function Skills() {
                     <motion.span
                       key={skill}
                       whileHover={{ scale: 1.05 }}
-                      className={`rounded border px-2.5 py-1 font-mono text-xs ${colors.tag}`}
+                      className={cn(
+                        "rounded border px-2.5 py-1 font-mono text-xs",
+                        theme.borderSoft,
+                        theme.text
+                      )}
                     >
                       {skill}
                     </motion.span>

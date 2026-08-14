@@ -6,6 +6,8 @@ import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
 import { Contact } from "@/components/sections/Contact";
 import { SequenceChapter } from "@/components/pathway/SequenceChapter";
+import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
+import { cn } from "@/lib/utils";
 import type { GithubProject } from "@/lib/github";
 
 interface SiteShellProps {
@@ -13,6 +15,8 @@ interface SiteShellProps {
 }
 
 export function SiteShell({ projects }: SiteShellProps) {
+  const { theme } = usePathwayTheme();
+
   return (
     <>
       <main>
@@ -36,7 +40,14 @@ export function SiteShell({ projects }: SiteShellProps) {
         <SequenceChapter rank={0}>
           <a
             href="/"
-            className="inline-block rounded border border-accent-amber/40 px-6 py-3 font-mono text-xs uppercase tracking-widest text-accent-amber transition-all hover:border-accent-cyan/50 hover:text-accent-cyan"
+            className={cn(
+              "inline-block rounded border px-6 py-3 font-mono text-xs uppercase tracking-widest transition-all",
+              theme.border,
+              theme.text,
+              theme.borderHover,
+              theme.hoverText,
+              theme.buttonGlow
+            )}
           >
             Reselect Pathway
           </a>

@@ -1,4 +1,18 @@
-export type PathwayColor = "violet" | "cyan" | "amber" | "rose";
+export type PathwayColor =
+  | "violet"
+  | "cyan"
+  | "amber"
+  | "rose"
+  | "gray"
+  | "scarlet"
+  | "azure"
+  | "orange"
+  | "light-gold"
+  | "dark-red"
+  | "cream"
+  | "golden"
+  | "blue"
+  | "light-red";
 
 export type SequenceTier =
   | "Low Sequence"
@@ -133,7 +147,7 @@ export const pathwayChoices: PathwayChoice[] = [
     description:
       "You steal time from complexity — refactoring, bypassing, and rewriting fate with a sleight of code.",
     symbol: "/pathways/Error_Symbol2.webp",
-    color: "rose",
+    color: "gray",
     ladder: [
       "Marauder",
       "Swindler",
@@ -177,7 +191,7 @@ export const pathwayChoices: PathwayChoice[] = [
     description:
       "You keep vigil in the dark mode of the world, watching over systems that never truly rest.",
     symbol: "/pathways/Darkness_Symbol2.webp",
-    color: "violet",
+    color: "scarlet",
     ladder: [
       "Sleepless",
       "Midnight Poet",
@@ -243,7 +257,7 @@ export const pathwayChoices: PathwayChoice[] = [
     description:
       "You decode the archives — documentation, accessibility, and the grammar of a coherent design language.",
     symbol: "/pathways/White_Tower_Symbol2.webp",
-    color: "rose",
+    color: "azure",
     ladder: [
       "Reader",
       "Student of Ratiocination",
@@ -287,7 +301,7 @@ export const pathwayChoices: PathwayChoice[] = [
     description:
       "You hunt waste and latency, tracking Core Web Vitals until the experience runs like a drawn bow.",
     symbol: "/pathways/Red_Priest_Symbol2.webp",
-    color: "amber",
+    color: "orange",
     ladder: [
       "Hunter",
       "Provoker",
@@ -346,6 +360,28 @@ export const pathwayChoices: PathwayChoice[] = [
     ],
   },
   {
+    id: "wheel-of-fortune",
+    name: "Wheel of Fortune",
+    sequenceName: "Monster",
+    sequence: "Sequence 9 → Sequence 0",
+    description:
+      "You read chance as a system — probability, timing, and the turns of fate that make an interface feel lucky.",
+    symbol: "/pathways/Wheel_of_Fortune_Symbol2.webp",
+    color: "cyan",
+    ladder: [
+      "Monster",
+      "Robot",
+      "Lucky One",
+      "Calamity Priest",
+      "Winner",
+      "Misfortune Mage",
+      "Chaoswalker",
+      "Soothsayer",
+      "Snake of Mercury",
+      "Wheel of Fortune",
+    ],
+  },
+  {
     id: "visionary",
     name: "Visionary",
     sequenceName: "Spectator",
@@ -353,7 +389,7 @@ export const pathwayChoices: PathwayChoice[] = [
     description:
       "You observe the user as they move, then shape journeys that feel inevitable from the first glance.",
     symbol: "/pathways/Visionary_Symbol2.webp",
-    color: "cyan",
+    color: "light-gold",
     ladder: [
       "Spectator",
       "Telepathist",
@@ -397,7 +433,7 @@ export const pathwayChoices: PathwayChoice[] = [
     description:
       "You invert the problem until a new perspective appears — suspension, patience, and a reversed view of the DOM.",
     symbol: "/pathways/Hanged_Man_Symbol2.webp",
-    color: "cyan",
+    color: "dark-red",
     ladder: [
       "Secrets Supplicant",
       "Listener",
@@ -419,7 +455,7 @@ export const pathwayChoices: PathwayChoice[] = [
     description:
       "You end what no longer serves: dead code, abandoned flows, and features that must be laid to rest.",
     symbol: "/pathways/Death_Symbol2.webp",
-    color: "violet",
+    color: "cream",
     ladder: [
       "Corpse Collector",
       "Gravedigger",
@@ -441,7 +477,7 @@ export const pathwayChoices: PathwayChoice[] = [
     description:
       "You craft artifacts of motion and mechanism — tools, engines, and interactions that feel engineered by wonder.",
     symbol: "/pathways/Paragon_Symbol2.webp",
-    color: "cyan",
+    color: "golden",
     ladder: [
       "Savant",
       "Archaeologist",
@@ -463,7 +499,7 @@ export const pathwayChoices: PathwayChoice[] = [
     description:
       "You break rules that deserve breaking — experimental UI, forbidden animations, and delightful chaos.",
     symbol: "/pathways/Abyss_Symbol2.webp",
-    color: "rose",
+    color: "dark-red",
     ladder: [
       "Criminal",
       "Unwinged Angel",
@@ -485,7 +521,7 @@ export const pathwayChoices: PathwayChoice[] = [
     description:
       "You command the currents of state and storm — navigation, flow, and the weather of a living application.",
     symbol: "/pathways/Tyrant_Symbol2.webp",
-    color: "amber",
+    color: "blue",
     ladder: [
       "Sailor",
       "Folk of Rage",
@@ -529,7 +565,7 @@ export const pathwayChoices: PathwayChoice[] = [
     description:
       "You mix subtle draughts of micro-interaction — small doses that heal confusion and soothe the user.",
     symbol: "/pathways/Moon_Symbol2.webp",
-    color: "cyan",
+    color: "light-red",
     ladder: [
       "Apothecary",
       "Beast Tamer",
