@@ -6,8 +6,11 @@ import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
 import { Contact } from "@/components/sections/Contact";
+import { getGithubProjects } from "@/lib/github";
 
-export default function Home() {
+export default async function Home() {
+  const projects = await getGithubProjects();
+
   return (
     <>
       <ParticleBackground />
@@ -16,7 +19,7 @@ export default function Home() {
         <Hero />
         <About />
         <Skills />
-        <Projects />
+        <Projects projects={projects} />
         <Contact />
       </main>
       <Footer />
