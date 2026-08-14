@@ -17,7 +17,7 @@ export function Hero() {
   return (
     <section
       id="sequence-9"
-      className="relative flex min-h-screen items-center overflow-hidden px-6 py-16"
+      className="relative flex min-h-screen items-center overflow-hidden px-6 pt-28 pb-16"
     >
       <div className="absolute inset-0 grid-bg opacity-25" />
 
@@ -91,7 +91,7 @@ export function Hero() {
       >
         <div className="flex flex-col items-center gap-2 text-muted">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em]">
-            Ascend
+            Descend to the realm of the blessed
           </span>
           <ArrowDown className="h-4 w-4 animate-bounce" />
         </div>

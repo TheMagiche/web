@@ -62,7 +62,7 @@ export function PathwayDrawing() {
   };
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden py-16">
+    <section className="relative flex min-h-screen items-center overflow-hidden py-16 pt-28">
       <div className="absolute inset-0 grid-bg opacity-20" />
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-6 lg:grid-cols-[minmax(22rem,40rem)_1fr] lg:gap-10">

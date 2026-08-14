@@ -49,10 +49,10 @@ export const pathways = [
 ];
 
 export const navLinks = [
-  { label: "Origin", href: "/home#hero" },
-  { label: "Pathways", href: "/home#skills" },
-  { label: "Grimoire", href: "/home#projects" },
-  { label: "Contact", href: "/home#contact" },
+  { label: "Origin", href: "/home#sequence-7" },
+  { label: "Pathways", href: "/home#sequence-5" },
+  { label: "Grimoire", href: "/home#sequence-4" },
+  { label: "Contact", href: "/home#sequence-2" },
 ];
 
 export const grimoireArcana = [

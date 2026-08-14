@@ -3,6 +3,7 @@ import { Cinzel, JetBrains_Mono, Lobster_Two, Space_Grotesk } from "next/font/go
 import { PathwayProvider } from "@/components/providers/PathwayProvider";
 import { SceneBackground } from "@/components/effects/SceneBackground";
 import { ParticleBackground } from "@/components/effects/ParticleBackground";
+import { Navbar } from "@/components/layout/Navbar";
 import "./globals.css";
 
 const cinzel = Cinzel({
@@ -56,6 +57,7 @@ export default function RootLayout({
         <PathwayProvider>
           <SceneBackground />
           <ParticleBackground />
+          <Navbar />
           {children}
         </PathwayProvider>
       </body>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Eye } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/data";
@@ -8,9 +9,11 @@ import { usePathway } from "@/components/providers/PathwayProvider";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
+  const pathname = usePathname();
   const { selected } = usePathway();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const onLanding = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -29,7 +32,7 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6">
-        <a href="/home#hero" className="group flex items-center gap-2">
+        <a href="/home#sequence-9" className="group flex items-center gap-2">
           <Eye className="h-5 w-5 shrink-0 text-accent-violet transition-colors group-hover:text-accent-cyan" />
           <span className="flex flex-col">
             <span className="font-display text-lg font-bold leading-none tracking-wider">
@@ -56,9 +59,14 @@ export function Navbar() {
 
         <a
           href="/"
-          className="hidden rounded border border-accent-amber/40 px-4 py-2 font-mono text-xs uppercase tracking-widest text-accent-amber transition-all hover:border-accent-cyan/50 hover:text-accent-cyan hover:shadow-[0_0_20px_rgba(0,245,212,0.2)] md:block"
+          className={cn(
+            "hidden rounded border px-4 py-2 font-mono text-xs uppercase tracking-widest transition-all md:block",
+            onLanding
+              ? "border-accent-cyan/50 text-accent-cyan"
+              : "border-accent-amber/40 text-accent-amber hover:border-accent-cyan/50 hover:text-accent-cyan hover:shadow-[0_0_20px_rgba(0,245,212,0.2)]"
+          )}
         >
-          Reselect Pathway
+          Select Pathway
         </a>
 
         <button
@@ -96,7 +104,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="inline-block rounded border border-accent-amber/40 px-4 py-2 font-mono text-xs uppercase tracking-widest text-accent-amber"
                 >
-                  Reselect Pathway
+                  Select Pathway
                 </a>
               </li>
             </ul>
