@@ -87,7 +87,7 @@ export function PathwayDrawing() {
           animate={{ opacity: 1, y: 0 }}
           className={cn(
             "font-mono text-[10px] uppercase tracking-[0.45em] transition-colors md:text-xs",
-            theme.text
+            // theme.text
           )}
         >
           {siteConfig.name}
@@ -109,7 +109,7 @@ export function PathwayDrawing() {
         <p
           className={cn(
             "mt-2 font-mono text-[10px] uppercase tracking-[0.3em] transition-colors",
-            theme.text
+            // theme.text
           )}
         >
           Sequence 0 · {active.name}
