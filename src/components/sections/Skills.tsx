@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MysticalCard } from "@/components/ui/MysticalCard";
 import { pathways } from "@/lib/data";
 import { usePathway } from "@/components/providers/PathwayProvider";
@@ -41,7 +40,7 @@ export function Skills() {
       ? {
           ...pathway,
           name: `${selected.name} Pathway`,
-          sequence: `Sequence 9 · ${selected.sequenceName}`,
+          sequence: `Sequence 0 · ${selected.name}`,
           symbol: selected.symbol,
           color: selected.color,
         }
@@ -49,16 +48,7 @@ export function Skills() {
   );
 
   return (
-    <section id="skills" className="relative px-6 py-32">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-violet/[0.02] to-transparent" />
-
-      <div className="relative mx-auto max-w-6xl">
-        <SectionHeading
-          title="Pathways of Power"
-          subtitle="In the world of frontend development, mastery follows sequences. Each pathway represents a domain of expertise I've ascended through."
-        />
-
-        <div className="grid gap-6 md:grid-cols-2">
+    <div className="grid gap-6 md:grid-cols-2">
           {displayedPathways.map((pathway, i) => {
             const colors = colorMap[pathway.color as keyof typeof colorMap];
 
@@ -110,14 +100,12 @@ export function Skills() {
                     whileInView={{ width: `${85 - i * 5}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: 0.3 + i * 0.1 }}
-                    className="h-full rounded-full bg-gradient-to-r from-accent-violet to-accent-cyan"
+                    className="h-full rounded-full bg-linear-to-r from-accent-violet to-accent-cyan"
                   />
                 </div>
               </MysticalCard>
             );
           })}
         </div>
-      </div>
-    </section>
   );
 }

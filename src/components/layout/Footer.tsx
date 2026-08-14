@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { siteConfig } from "@/lib/data";
+import { usePathway } from "@/components/providers/PathwayProvider";
 import {
   GitHubIcon,
   LinkedInIcon,
@@ -15,6 +16,8 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const { selected } = usePathway();
+
   return (
     <footer className="relative border-t border-border bg-surface/50 py-12">
       <div className="mx-auto max-w-6xl px-6">
@@ -29,8 +32,14 @@ export function Footer() {
               {siteConfig.name}
             </p>
             <p className="mt-1 font-mono text-xs text-muted">
-              Frontend Developer · Interface Alchemist
+              Sequence 0 · {selected.name} Pathway
             </p>
+            <a
+              href="/"
+              className="mt-4 inline-block font-mono text-[10px] uppercase tracking-[0.28em] text-accent-amber transition-colors hover:text-accent-cyan"
+            >
+              Reselect Pathway
+            </a>
           </motion.div>
 
           <div className="flex items-center gap-6">

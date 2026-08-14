@@ -49,7 +49,6 @@ export const pathways = [
 ];
 
 export const navLinks = [
-  { label: "Draw", href: "/" },
   { label: "Origin", href: "/home#hero" },
   { label: "Pathways", href: "/home#skills" },
   { label: "Grimoire", href: "/home#projects" },

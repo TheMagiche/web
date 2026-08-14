@@ -1,18 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
-import { GlitchText } from "@/components/effects/GlitchText";
+import { ArrowDown } from "lucide-react";
+import { PathwayTarotCard } from "@/components/pathway/PathwayTarotCard";
 import { usePathway } from "@/components/providers/PathwayProvider";
-import { siteConfig } from "@/lib/data";
+import { getSequenceStory, pathwayChoices } from "@/lib/pathways";
 
 export function Hero() {
   const { selected } = usePathway();
+  const cardIndex = Math.max(
+    0,
+    pathwayChoices.findIndex((pathway) => pathway.id === selected.id)
+  );
+  const story = getSequenceStory(9, selected);
 
   return (
     <section
-      id="hero"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-20"
+      id="sequence-9"
+      className="relative flex min-h-screen items-center overflow-hidden px-6 py-16"
     >
       <div className="absolute inset-0 grid-bg opacity-25" />
 
@@ -29,82 +34,67 @@ export function Hero() {
         className="absolute h-48 w-48 translate-x-32 translate-y-16 rounded-full bg-accent-cyan/10 blur-[80px] animate-pulse-glow"
       />
 
-      <div className="relative z-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-6 flex items-center justify-center gap-2"
-        >
-          <Sparkles className="h-4 w-4 text-accent-amber animate-flicker" />
-          <span className="font-mono text-xs uppercase tracking-[0.4em] text-accent-cyan">
-            Sequence 9 · {selected.sequenceName}
-          </span>
-          <Sparkles className="h-4 w-4 text-accent-amber animate-flicker" />
-        </motion.div>
-
-        <GlitchText
-          as="h1"
-          className="text-5xl font-bold md:text-7xl lg:text-8xl"
-        >
-          {siteConfig.name}
-        </GlitchText>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-4 font-display text-xl tracking-wide text-muted md:text-2xl"
-        >
-          {siteConfig.title}
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-          className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted/80"
-        >
-          {siteConfig.tagline}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
-          className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
-        >
-          <a
-            href="#projects"
-            className="group relative overflow-hidden rounded border border-accent-violet/40 bg-accent-violet/10 px-8 py-3 font-mono text-sm uppercase tracking-widest text-accent-violet transition-all hover:border-accent-cyan/50 hover:bg-accent-cyan/10 hover:text-accent-cyan hover:shadow-[0_0_30px_rgba(0,245,212,0.2)]"
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[minmax(18rem,32rem)_1fr] lg:gap-12">
+        <div>
+          <motion.p
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="font-mono text-xs uppercase tracking-[0.4em] text-accent-cyan"
           >
-            <span className="relative z-10">Explore the Grimoire</span>
-            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-accent-cyan/10 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
-          </a>
-          <a
-            href="#contact"
-            className="rounded border border-border px-8 py-3 font-mono text-sm uppercase tracking-widest text-muted transition-all hover:border-accent-violet/30 hover:text-foreground"
+            Sequence 9 · {story.tier}
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mt-4 font-display text-5xl font-bold tracking-wide md:text-7xl lg:text-8xl"
           >
-            Send a Whisper
-          </a>
-        </motion.div>
+            {story.title}
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="mt-3 font-mono text-[11px] uppercase tracking-[0.32em] text-accent-amber"
+          >
+            {story.kicker}
+          </motion.p>
+
+          <motion.p
+            key={`${selected.id}-copy`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.35 }}
+            className="mt-6 max-w-xl text-lg leading-relaxed text-muted/80"
+          >
+            {story.body}
+          </motion.p>
+        </div>
+
+        <div className="flex justify-center lg:justify-end">
+          <PathwayTarotCard
+            pathway={selected}
+            index={cardIndex}
+            active
+            selected
+          />
+        </div>
       </div>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1.2 }}
-        className="absolute bottom-10 z-10"
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
       >
-        <a
-          href="#about"
-          className="flex flex-col items-center gap-2 text-muted transition-colors hover:text-accent-cyan"
-        >
+        <div className="flex flex-col items-center gap-2 text-muted">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em]">
-            Descend
+            Ascend
           </span>
           <ArrowDown className="h-4 w-4 animate-bounce" />
-        </a>
+        </div>
       </motion.div>
     </section>
   );

@@ -19,11 +19,11 @@ export function SectionHeading({ title, subtitle, className }: SectionHeadingPro
       className={cn("mb-16 text-center", className)}
     >
       <div className="mb-4 flex items-center justify-center gap-4">
-        <div className="h-px w-12 bg-gradient-to-r from-transparent to-accent-violet" />
+        <div className="h-px w-12 bg-linear-to-r from-transparent to-accent-violet" />
         <span className="font-mono text-xs uppercase tracking-[0.3em] text-accent-cyan">
           ◆
         </span>
-        <div className="h-px w-12 bg-gradient-to-l from-transparent to-accent-violet" />
+        <div className="h-px w-12 bg-linear-to-l from-transparent to-accent-violet" />
       </div>
       <h2 className="font-display text-3xl font-bold tracking-wide text-foreground md:text-4xl lg:text-5xl">
         {title}

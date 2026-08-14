@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Mail, MapPin } from "lucide-react";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { siteConfig } from "@/lib/data";
 
 export function Contact() {
@@ -16,16 +15,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative px-6 py-32">
-      <div className="absolute inset-0 bg-linear-to-t from-accent-violet/[0.03] to-transparent" />
-
-      <div className="relative mx-auto max-w-4xl">
-        <SectionHeading
-          title="Send a Whisper"
-          subtitle="Every great collaboration begins with a message through the fog. Reach out and let's build something extraordinary."
-        />
-
-        <div className="grid gap-12 md:grid-cols-5">
+    <div className="grid gap-12 md:grid-cols-5">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -129,8 +119,6 @@ export function Contact() {
               )}
             </button>
           </motion.form>
-        </div>
-      </div>
-    </section>
+    </div>
   );
 }

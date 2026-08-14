@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Eye } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/data";
+import { usePathway } from "@/components/providers/PathwayProvider";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
+  const { selected } = usePathway();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -28,9 +30,14 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6">
         <a href="/home#hero" className="group flex items-center gap-2">
-          <Eye className="h-5 w-5 text-accent-violet transition-colors group-hover:text-accent-cyan" />
-          <span className="font-display text-lg font-bold tracking-wider">
-            {siteConfig.name}
+          <Eye className="h-5 w-5 shrink-0 text-accent-violet transition-colors group-hover:text-accent-cyan" />
+          <span className="flex flex-col">
+            <span className="font-display text-lg font-bold leading-none tracking-wider">
+              {siteConfig.name}
+            </span>
+            <span className="mt-1 font-mono text-[9px] uppercase tracking-[0.28em] text-accent-amber">
+              Sequence 0 · {selected.name}
+            </span>
           </span>
         </a>
 
@@ -48,10 +55,10 @@ export function Navbar() {
         </ul>
 
         <a
-          href="/home#contact"
-          className="hidden rounded border border-accent-violet/30 px-4 py-2 font-mono text-xs uppercase tracking-widest text-accent-violet transition-all hover:border-accent-cyan/50 hover:text-accent-cyan hover:shadow-[0_0_20px_rgba(0,245,212,0.2)] md:block"
+          href="/"
+          className="hidden rounded border border-accent-amber/40 px-4 py-2 font-mono text-xs uppercase tracking-widest text-accent-amber transition-all hover:border-accent-cyan/50 hover:text-accent-cyan hover:shadow-[0_0_20px_rgba(0,245,212,0.2)] md:block"
         >
-          Initiate Contact
+          Reselect Pathway
         </a>
 
         <button
@@ -85,11 +92,11 @@ export function Navbar() {
               ))}
               <li>
                 <a
-                  href="/home#contact"
+                  href="/"
                   onClick={() => setMobileOpen(false)}
-                  className="inline-block rounded border border-accent-violet/30 px-4 py-2 font-mono text-xs uppercase tracking-widest text-accent-violet"
+                  className="inline-block rounded border border-accent-amber/40 px-4 py-2 font-mono text-xs uppercase tracking-widest text-accent-amber"
                 >
-                  Initiate Contact
+                  Reselect Pathway
                 </a>
               </li>
             </ul>

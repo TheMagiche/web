@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cinzel, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Cinzel, JetBrains_Mono, Lobster_Two, Space_Grotesk } from "next/font/google";
 import { PathwayProvider } from "@/components/providers/PathwayProvider";
 import { SceneBackground } from "@/components/effects/SceneBackground";
 import { ParticleBackground } from "@/components/effects/ParticleBackground";
@@ -19,6 +19,12 @@ const spaceGrotesk = Space_Grotesk({
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+});
+
+const lobsterTwo = Lobster_Two({
+  variable: "--font-lobster-two",
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -43,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cinzel.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${cinzel.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${lobsterTwo.variable} h-full antialiased`}
     >
       <body className="scanline-overlay min-h-full bg-background font-sans text-foreground">
         <div className="noise-overlay" />
