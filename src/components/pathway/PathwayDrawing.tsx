@@ -10,7 +10,7 @@ import { pathwayChoices } from "@/lib/pathways";
 
 export function PathwayDrawing() {
   const router = useRouter();
-  const { selected, hasChosen, selectPathway } = usePathway();
+  const { selected, hasChosen, selectPathway, highlightPathway } = usePathway();
   const [activeIndex, setActiveIndex] = useState(0);
   const dragOrigin = useRef<number | null>(null);
 
@@ -19,8 +19,11 @@ export function PathwayDrawing() {
   const next = pathwayChoices[activeIndex + 1];
 
   const goToIndex = useCallback((index: number) => {
-    setActiveIndex(Math.max(0, Math.min(pathwayChoices.length - 1, index)));
-  }, []);
+    const next = Math.max(0, Math.min(pathwayChoices.length - 1, index));
+    setActiveIndex(next);
+    const pathway = pathwayChoices[next];
+    if (pathway) highlightPathway(pathway.id);
+  }, [highlightPathway]);
 
   const handleSelect = useCallback(
     (id: string) => {
@@ -29,6 +32,10 @@ export function PathwayDrawing() {
     },
     [router, selectPathway]
   );
+
+  useEffect(() => {
+    highlightPathway(active.id);
+  }, [active.id, highlightPathway]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -95,7 +102,7 @@ export function PathwayDrawing() {
             {active.description}
           </motion.p>
           <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent-amber">
-            Sequence 9 · {active.sequenceName}
+            Sequence 0 · {active.name}
             {hasChosen && selected.id === active.id ? " · Drawn" : ""}
           </p>
           <button

@@ -19,14 +19,17 @@ const STORAGE_KEY = "themagiche-pathway";
 
 type PathwayContextValue = {
   selected: PathwayChoice;
+  highlighted: PathwayChoice;
   hasChosen: boolean;
   selectPathway: (id: string) => PathwayChoice | null;
+  highlightPathway: (id: string) => void;
 };
 
 const PathwayContext = createContext<PathwayContextValue | null>(null);
 
 export function PathwayProvider({ children }: { children: ReactNode }) {
   const [selected, setSelected] = useState<PathwayChoice>(defaultPathway);
+  const [highlighted, setHighlighted] = useState<PathwayChoice>(defaultPathway);
   const [hasChosen, setHasChosen] = useState(false);
 
   useEffect(() => {
@@ -34,6 +37,7 @@ export function PathwayProvider({ children }: { children: ReactNode }) {
     const match = pathwayChoices.find((pathway) => pathway.id === stored);
     if (match) {
       setSelected(match);
+      setHighlighted(match);
       setHasChosen(true);
     }
   }, []);
@@ -42,14 +46,26 @@ export function PathwayProvider({ children }: { children: ReactNode }) {
     const match = pathwayChoices.find((pathway) => pathway.id === id);
     if (!match) return null;
     setSelected(match);
+    setHighlighted(match);
     setHasChosen(true);
     window.localStorage.setItem(STORAGE_KEY, match.id);
     return match;
   }, []);
 
+  const highlightPathway = useCallback((id: string) => {
+    const match = pathwayChoices.find((pathway) => pathway.id === id);
+    if (match) setHighlighted(match);
+  }, []);
+
   const value = useMemo(
-    () => ({ selected, hasChosen, selectPathway }),
-    [selected, hasChosen, selectPathway]
+    () => ({
+      selected,
+      highlighted,
+      hasChosen,
+      selectPathway,
+      highlightPathway,
+    }),
+    [selected, highlighted, hasChosen, selectPathway, highlightPathway]
   );
 
   return (

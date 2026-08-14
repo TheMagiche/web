@@ -6,14 +6,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Eye } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/data";
 import { usePathway } from "@/components/providers/PathwayProvider";
+import { useActiveSequenceRank } from "@/components/pathway/useActiveSequenceRank";
+import { getSequenceTitle } from "@/lib/pathways";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const pathname = usePathname();
-  const { selected } = usePathway();
+  const { selected, highlighted } = usePathway();
+  const activeRank = useActiveSequenceRank();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const onLanding = pathname === "/";
+  const sequenceLabel =
+    activeRank != null
+      ? `Sequence ${activeRank} · ${getSequenceTitle(selected, activeRank)}`
+      : `Sequence 0 · ${highlighted.name}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -39,7 +46,7 @@ export function Navbar() {
               {siteConfig.name}
             </span>
             <span className="mt-1 font-mono text-[9px] uppercase tracking-[0.28em] text-accent-amber">
-              Sequence 0 · {selected.name}
+              {sequenceLabel}
             </span>
           </span>
         </a>

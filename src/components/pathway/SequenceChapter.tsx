@@ -6,7 +6,7 @@ import { ArrowDown } from "lucide-react";
 import { PathwayTarotCard } from "@/components/pathway/PathwayTarotCard";
 import { usePathway } from "@/components/providers/PathwayProvider";
 import { getDeveloperCopy } from "@/lib/developerJourney";
-import { pathwayChoices } from "@/lib/pathways";
+import { getSequenceStory, pathwayChoices } from "@/lib/pathways";
 import { cn } from "@/lib/utils";
 
 export type CardPlacement = "right" | "left" | "top";
@@ -31,6 +31,7 @@ export function SequenceChapter({
 }: SequenceChapterProps) {
   const { selected } = usePathway();
   const copy = getDeveloperCopy(rank);
+  const story = getSequenceStory(rank, selected);
   const placement = getCardPlacement(rank);
   const cardIndex = Math.max(
     0,
@@ -46,7 +47,7 @@ export function SequenceChapter({
         viewport={{ once: true, margin: "-80px" }}
         className="font-mono text-xs uppercase tracking-[0.4em] text-accent-cyan"
       >
-        {copy.kicker}
+        Sequence {rank} · {story.tier}
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 16 }}
@@ -62,9 +63,18 @@ export function SequenceChapter({
               : "text-4xl md:text-5xl lg:text-6xl"
           )}
         >
-          {copy.heading}
+          {story.title}
         </Heading>
       </motion.div>
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ delay: 0.08 }}
+        className="mt-3 font-display text-xl tracking-wide text-foreground md:text-2xl"
+      >
+        {copy.heading}
+      </motion.p>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
