@@ -120,18 +120,31 @@ function poseAt(
   slots: SlotMap,
   sections: SectionMap
 ): BridgePose | null {
-  if (ranks.some((rank) => !slots[rank])) return null;
+  if (ranks.length < 2 || ranks.some((rank) => !slots[rank])) return null;
 
-  if (ranks.length === 2) {
-    const fromRank = ranks[0];
-    const toRank = ranks[1];
-    const start = arriveAt(slots[fromRank]);
-    const end = arriveAt(slots[toRank]);
-    if (scrollY < start) {
-      return parkedPose(slots[fromRank], scrollY, fromRank);
+  for (let index = 0; index < ranks.length - 1; index += 1) {
+    const fromRank = ranks[index];
+    const toRank = ranks[index + 1];
+    let dragStart: number;
+    let dragEnd: number;
+
+    if (index === 0) {
+      dragStart = fromRank === 9 ? 0 : arriveAt(slots[fromRank]);
+      dragEnd = arriveAt(slots[toRank]);
+    } else {
+      const arriveFrom = arriveAt(slots[fromRank]);
+      dragStart = leaveAt(sections[fromRank], arriveFrom, 0.4);
+      if (scrollY < dragStart) {
+        return parkedPose(slots[fromRank], scrollY, fromRank);
+      }
+      dragEnd = dragStart + window.innerHeight * 0.4;
     }
-    if (scrollY < end) {
-      const local = end <= start ? 1 : clamp((scrollY - start) / (end - start));
+
+    if (scrollY < dragEnd) {
+      const local =
+        dragEnd <= dragStart
+          ? 1
+          : clamp((scrollY - dragStart) / (dragEnd - dragStart));
       return dragTravel(
         slots[fromRank],
         slots[toRank],
@@ -141,28 +154,10 @@ function poseAt(
         scrollY
       );
     }
-    return parkedPose(slots[toRank], scrollY, toRank);
   }
 
-  const arrive8 = arriveAt(slots[8]);
-  const leave8 = leaveAt(sections[8], arrive8, 0.4);
-  const dropEnd = leave8 + window.innerHeight * 0.4;
-
-  if (scrollY < arrive8) {
-    const local = arrive8 <= 0 ? 1 : clamp(scrollY / arrive8);
-    return dragTravel(slots[9], slots[8], 9, 8, local, scrollY);
-  }
-
-  if (scrollY < leave8) {
-    return parkedPose(slots[8], scrollY, 8);
-  }
-
-  if (scrollY < dropEnd) {
-    const local = clamp((scrollY - leave8) / Math.max(1, dropEnd - leave8));
-    return dragTravel(slots[8], slots[7], 8, 7, local, scrollY);
-  }
-
-  return parkedPose(slots[7], scrollY, 7);
+  const lastRank = ranks[ranks.length - 1];
+  return parkedPose(slots[lastRank], scrollY, lastRank);
 }
 
 export function SequenceCardBridge({

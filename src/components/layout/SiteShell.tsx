@@ -38,28 +38,28 @@ export function SiteShell({ projects }: SiteShellProps) {
         <SequenceChapter rank={4} bleed>
           <Projects projects={projects} />
         </SequenceChapter>
-        <SequenceCardBridge ranks={[3, 2]}>
+        <SequenceCardBridge ranks={[3, 2, 1, 0]}>
           <SequenceChapter rank={3} cardMode="slot" />
           <SequenceChapter rank={2} cardMode="slot">
             <Contact />
           </SequenceChapter>
+          <SequenceChapter rank={1} cardMode="slot" />
+          <SequenceChapter rank={0} cardMode="slot">
+            <TransitionLink
+              href="/"
+              className={cn(
+                "inline-block rounded border px-6 py-3 font-mono text-xs uppercase tracking-widest transition-all",
+                theme.border,
+                theme.text,
+                theme.borderHover,
+                theme.hoverText,
+                theme.buttonGlow
+              )}
+            >
+              Reselect Pathway
+            </TransitionLink>
+          </SequenceChapter>
         </SequenceCardBridge>
-        <SequenceChapter rank={1} />
-        <SequenceChapter rank={0}>
-          <TransitionLink
-            href="/"
-            className={cn(
-              "inline-block rounded border px-6 py-3 font-mono text-xs uppercase tracking-widest transition-all",
-              theme.border,
-              theme.text,
-              theme.borderHover,
-              theme.hoverText,
-              theme.buttonGlow
-            )}
-          >
-            Reselect Pathway
-          </TransitionLink>
-        </SequenceChapter>
       </main>
       <Footer />
     </>
