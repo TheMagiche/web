@@ -53,7 +53,21 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--accent-violet) var(--surface);
+  scrollbar-color: #ffffff var(--surface);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border-radius: 999px;
 }
 
 html {
@@ -265,22 +279,6 @@ body {
   ::view-transition-new(scene-background) {
     animation-duration: 0.01ms !important;
   }
-}
-
-@keyframes mouse-burst {
-  0% {
-    transform: translate(-50%, -50%) scale(0.4);
-    opacity: 0.85;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(6);
-    opacity: 0;
-  }
-}
-
-.mouse-burst {
-  animation: mouse-burst 0.7s ease-out forwards;
-  box-shadow: 0 0 18px rgba(0, 245, 212, 0.35);
 }
 
 .scanline-overlay::after {

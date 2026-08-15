@@ -5,11 +5,12 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
-import { navigateWithViewTransition } from "@/lib/viewTransition";
 import { cn } from "@/lib/utils";
 
 const HOLD_MS = 2000;
@@ -31,20 +32,26 @@ export function SceneTransitionProvider({ children }: { children: ReactNode }) {
   const [holding, setHolding] = useState(false);
   const [cinematic, setCinematic] = useState(false);
   const [displayPath, setDisplayPath] = useState(pathname);
+  const pendingRef = useRef(false);
+  const holdTimerRef = useRef<number>(0);
 
   useEffect(() => {
-    if (holding && pathname === displayPath) {
-      const reveal = window.setTimeout(() => {
-        setHolding(false);
-        setCinematic(false);
-      }, 80);
-      return () => window.clearTimeout(reveal);
-    }
+    if (!holding || pathname !== displayPath || !pendingRef.current) return;
+
+    pendingRef.current = false;
+    setHolding(false);
+    setCinematic(false);
   }, [displayPath, holding, pathname]);
+
+  useEffect(() => {
+    return () => window.clearTimeout(holdTimerRef.current);
+  }, []);
 
   const navigate = useCallback(
     (href: string) => {
       if (href !== "/home") {
+        pendingRef.current = false;
+        window.clearTimeout(holdTimerRef.current);
         setCinematic(false);
         setHolding(false);
         setDisplayPath(href);
@@ -52,14 +59,15 @@ export function SceneTransitionProvider({ children }: { children: ReactNode }) {
         return;
       }
 
+      if (pendingRef.current) return;
+
+      pendingRef.current = true;
       setDisplayPath(href);
       setCinematic(true);
       setHolding(true);
 
-      window.setTimeout(() => {
-        navigateWithViewTransition(() => {
-          router.push(href);
-        });
+      holdTimerRef.current = window.setTimeout(() => {
+        router.push(href);
       }, HOLD_MS);
     },
     [router]
@@ -74,6 +82,22 @@ export function SceneTransitionProvider({ children }: { children: ReactNode }) {
         navigate,
       }}
     >
+      <AnimatePresence>
+        {holding && (
+          <motion.div
+            key="spectator-warning"
+            className="pointer-events-none fixed inset-0 z-40 flex items-center justify-center px-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.55, delay: 0.15 }}
+          >
+            <p className="font-display text-center text-2xl font-semibold tracking-[0.18em] text-foreground drop-shadow-[0_2px_24px_rgba(0,0,0,0.7)] md:text-4xl">
+              Beware of the spectator
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {children}
     </SceneTransitionContext.Provider>
   );

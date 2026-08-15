@@ -16,7 +16,9 @@ export function PathwayDrawing() {
   const { navigate } = useSceneTransition();
   const { selected, hasChosen, selectPathway, highlightPathway } = usePathway();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [drawing, setDrawing] = useState(false);
   const dragOrigin = useRef<number | null>(null);
+  const didDrag = useRef(false);
 
   const active = pathwayChoices[activeIndex] ?? pathwayChoices[0];
   const previous = pathwayChoices[activeIndex - 1];
@@ -24,21 +26,26 @@ export function PathwayDrawing() {
   const theme = getPathwayTheme(active.color);
 
   const goToIndex = useCallback((index: number) => {
+    if (drawing) return;
     const next = Math.max(0, Math.min(pathwayChoices.length - 1, index));
     if (next === activeIndex) return;
     playPaperSlide();
     setActiveIndex(next);
     const pathway = pathwayChoices[next];
     if (pathway) highlightPathway(pathway.id);
-  }, [activeIndex, highlightPathway]);
+  }, [activeIndex, drawing, highlightPathway]);
 
   const handleSelect = useCallback(
     (id: string) => {
+      if (drawing) return;
       playPaperSlide();
       selectPathway(id);
-      navigate("/home");
+      setDrawing(true);
+      window.setTimeout(() => {
+        navigate("/home");
+      }, 2100);
     },
-    [navigate, selectPathway]
+    [drawing, navigate, selectPathway]
   );
 
   useEffect(() => {
@@ -66,14 +73,25 @@ export function PathwayDrawing() {
 
   const onPointerDown = (event: React.PointerEvent) => {
     dragOrigin.current = event.clientX;
+    didDrag.current = false;
   };
 
   const onPointerUp = (event: React.PointerEvent) => {
     if (dragOrigin.current == null) return;
     const delta = event.clientX - dragOrigin.current;
     dragOrigin.current = null;
+    if (Math.abs(delta) <= 50) return;
+    didDrag.current = true;
     if (delta > 50) goToIndex(activeIndex - 1);
     if (delta < -50) goToIndex(activeIndex + 1);
+  };
+
+  const selectCard = (id: string) => {
+    if (didDrag.current) {
+      didDrag.current = false;
+      return;
+    }
+    handleSelect(id);
   };
 
   return (
@@ -118,12 +136,17 @@ export function PathwayDrawing() {
       </header>
 
       <div
-        className="relative z-10 mx-auto flex w-full max-w-4xl min-h-0 flex-1 items-center justify-center"
+        className="relative z-10 mx-auto flex w-full max-w-4xl min-h-0 flex-1 items-center justify-center [perspective:1400px]"
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
       >
         {previous && (
-          <div className="pointer-events-auto absolute left-0 z-0 origin-center translate-x-[-18%] scale-[0.72] opacity-40 transition-all duration-300 hover:opacity-60 sm:translate-x-[-8%]">
+          <div
+            className={cn(
+              "pointer-events-auto absolute left-0 z-0 origin-center translate-x-[-18%] scale-[0.72] opacity-40 transition-all duration-300 hover:opacity-60 sm:translate-x-[-8%]",
+              drawing && "pointer-events-none opacity-0"
+            )}
+          >
             <PathwayTarotCard
               pathway={previous}
               index={activeIndex - 1}
@@ -139,13 +162,19 @@ export function PathwayDrawing() {
             index={activeIndex}
             compact
             active
+            drawing={drawing}
             selected={selected.id === active.id && hasChosen}
-            onSelect={() => handleSelect(active.id)}
+            onSelect={() => selectCard(active.id)}
           />
         </div>
 
         {next && (
-          <div className="pointer-events-auto absolute right-0 z-0 origin-center translate-x-[18%] scale-[0.72] opacity-40 transition-all duration-300 hover:opacity-60 sm:translate-x-[8%]">
+          <div
+            className={cn(
+              "pointer-events-auto absolute right-0 z-0 origin-center translate-x-[18%] scale-[0.72] opacity-40 transition-all duration-300 hover:opacity-60 sm:translate-x-[8%]",
+              drawing && "pointer-events-none opacity-0"
+            )}
+          >
             <PathwayTarotCard
               pathway={next}
               index={activeIndex + 1}
@@ -160,8 +189,9 @@ export function PathwayDrawing() {
         <button
           type="button"
           onClick={() => handleSelect(active.id)}
+          disabled={drawing}
           className={cn(
-            "rounded border px-6 py-2.5 font-mono text-xs uppercase tracking-widest transition-all",
+            "rounded border px-6 py-2.5 font-mono text-xs uppercase tracking-widest transition-all disabled:opacity-40",
             theme.border,
             theme.bg,
             theme.text,

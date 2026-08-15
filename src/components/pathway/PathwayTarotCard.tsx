@@ -14,6 +14,7 @@ interface PathwayTarotCardProps {
   selected?: boolean;
   active?: boolean;
   compact?: boolean;
+  drawing?: boolean;
   onSelect?: () => void;
 }
 
@@ -24,6 +25,7 @@ export function PathwayTarotCard({
   selected = false,
   active = false,
   compact = false,
+  drawing = false,
   onSelect,
 }: PathwayTarotCardProps) {
   const arcana = grimoireArcana[index % grimoireArcana.length];
@@ -34,7 +36,7 @@ export function PathwayTarotCard({
   const face = (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl border-2 bg-linear-to-b p-1.75 transition-shadow duration-500",
+        "relative overflow-hidden rounded-xl border-2 bg-linear-to-b p-1.75 transition-shadow duration-500 [backface-visibility:hidden]",
         compact
           ? "h-72 w-44 sm:h-80 sm:w-48"
           : "h-112 w-68 sm:h-128 sm:w-76",
@@ -122,10 +124,19 @@ export function PathwayTarotCard({
   );
 
   const motionProps = {
-    initial: { opacity: 0, y: 28 },
-    animate: { opacity: 1, y: 0, scale: 1, rotate: 0 },
-    className: "pathway-draw-card",
-  } as const;
+    initial: { opacity: 0, y: 28, rotateY: 0 },
+    animate: drawing
+      ? { opacity: 1, y: 0, scale: 1.45, rotateY: 360 }
+      : { opacity: 1, y: 0, scale: 1, rotateY: 0 },
+    transition: drawing
+      ? { duration: 1.1, ease: [0.22, 1, 0.36, 1] }
+      : { duration: 0.45, ease: "easeOut" },
+    style: { transformStyle: "preserve-3d" as const },
+    className: cn(
+      "pathway-draw-card [transform-style:preserve-3d]",
+      drawing && "relative z-50"
+    ),
+  };
 
   if (interactive) {
     return (
@@ -134,7 +145,8 @@ export function PathwayTarotCard({
         onClick={onSelect}
         aria-label={`Draw the ${pathway.name} pathway`}
         aria-pressed={selected}
-        whileHover={{ y: -8 }}
+        disabled={drawing}
+        whileHover={drawing ? undefined : { y: -8 }}
         {...motionProps}
       >
         {face}

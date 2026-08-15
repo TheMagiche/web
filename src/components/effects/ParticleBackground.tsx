@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Particles, { ParticlesProvider } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { ISourceOptions } from "@tsparticles/engine";
+import { useSceneTransition } from "@/components/providers/SceneTransitionProvider";
+import { cn } from "@/lib/utils";
 
 const particleOptions: ISourceOptions = {
   fullScreen: { enable: false },
@@ -53,10 +54,6 @@ const particleOptions: ISourceOptions = {
         enable: true,
         mode: ["attract", "grab"],
       },
-      onClick: {
-        enable: true,
-        mode: "push",
-      },
     },
     modes: {
       attract: {
@@ -74,9 +71,6 @@ const particleOptions: ISourceOptions = {
           color: "#00f5d4",
         },
       },
-      push: {
-        quantity: 8,
-      },
     },
   },
   detectRetina: true,
@@ -86,52 +80,26 @@ function ParticleCanvas() {
   return (
     <Particles
       id="tsparticles"
-      className="pointer-events-none fixed inset-0 -z-10 h-full w-full"
+      className="pointer-events-none fixed inset-0 -z-10 h-full w-full [view-transition-name:none]"
       options={particleOptions}
     />
   );
 }
 
-type Burst = {
-  id: number;
-  x: number;
-  y: number;
-};
-
-function ClickBursts() {
-  const [bursts, setBursts] = useState<Burst[]>([]);
-
-  useEffect(() => {
-    const onClick = (event: PointerEvent) => {
-      const id = event.timeStamp;
-      setBursts((current) => [...current, { id, x: event.clientX, y: event.clientY }]);
-      window.setTimeout(() => {
-        setBursts((current) => current.filter((burst) => burst.id !== id));
-      }, 700);
-    };
-
-    window.addEventListener("pointerdown", onClick);
-    return () => window.removeEventListener("pointerdown", onClick);
-  }, []);
-
-  return (
-    <div className="pointer-events-none fixed inset-0 z-30 overflow-hidden" aria-hidden>
-      {bursts.map((burst) => (
-        <span
-          key={burst.id}
-          className="mouse-burst absolute h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent-cyan/70"
-          style={{ left: burst.x, top: burst.y }}
-        />
-      ))}
-    </div>
-  );
-}
-
 export function ParticleBackground() {
+  const { holding } = useSceneTransition();
+
   return (
-    <ParticlesProvider init={loadSlim}>
-      <ParticleCanvas />
-      <ClickBursts />
-    </ParticlesProvider>
+    <div
+      className={cn(
+        "pointer-events-none [view-transition-name:none]",
+        holding && "invisible"
+      )}
+      aria-hidden={holding}
+    >
+      <ParticlesProvider init={loadSlim}>
+        <ParticleCanvas />
+      </ParticlesProvider>
+    </div>
   );
 }

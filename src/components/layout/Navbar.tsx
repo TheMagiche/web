@@ -39,7 +39,7 @@ export function Navbar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={cn(
         "fixed top-0 z-40 w-full transition-all duration-300",
-        scrolled ? "glass py-3" : "bg-transparent py-5"
+        scrolled ? "glass border-none py-3" : "bg-transparent py-5"
       )}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6">
@@ -79,10 +79,8 @@ export function Navbar() {
         <TransitionLink
           href="/"
           className={cn(
-            "hidden rounded border px-4 py-2 font-mono text-xs uppercase tracking-widest transition-all md:block",
-            theme.border,
+            "hidden rounded px-4 py-2 font-mono text-xs uppercase tracking-widest transition-all md:block",
             theme.text,
-            theme.borderHover,
             theme.buttonGlow
           )}
         >
@@ -104,7 +102,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="glass border-t border-border md:hidden"
+            className="glass border-none md:hidden"
           >
             <ul className="flex flex-col gap-4 px-6 py-6">
               {navLinks.map((link) => (
@@ -126,8 +124,7 @@ export function Navbar() {
                   href="/"
                   onClick={() => setMobileOpen(false)}
                   className={cn(
-                    "inline-block rounded border px-4 py-2 font-mono text-xs uppercase tracking-widest",
-                    theme.border,
+                    "inline-block rounded px-4 py-2 font-mono text-xs uppercase tracking-widest",
                     theme.text
                   )}
                 >
