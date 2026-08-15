@@ -9,6 +9,7 @@ import { SequenceChapter } from "@/components/pathway/SequenceChapter";
 import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
 import { cn } from "@/lib/utils";
 import type { GithubProject } from "@/lib/github";
+import { TransitionLink } from "@/components/ui/TransitionLink";
 
 interface SiteShellProps {
   projects: GithubProject[];
@@ -38,7 +39,7 @@ export function SiteShell({ projects }: SiteShellProps) {
         </SequenceChapter>
         <SequenceChapter rank={1} />
         <SequenceChapter rank={0}>
-          <a
+          <TransitionLink
             href="/"
             className={cn(
               "inline-block rounded border px-6 py-3 font-mono text-xs uppercase tracking-widest transition-all",
@@ -50,7 +51,7 @@ export function SiteShell({ projects }: SiteShellProps) {
             )}
           >
             Reselect Pathway
-          </a>
+          </TransitionLink>
         </SequenceChapter>
       </main>
       <Footer />

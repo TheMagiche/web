@@ -8,7 +8,7 @@ import { usePathway } from "@/components/providers/PathwayProvider";
 import { useActiveSequenceRank } from "@/components/pathway/useActiveSequenceRank";
 import { getSequenceTitle } from "@/lib/pathways";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { TransitionLink } from "@/components/ui/TransitionLink";
 import { usePathname } from "next/navigation";
 import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
 
@@ -76,7 +76,7 @@ export function Navbar() {
           ))}
         </ul>
 
-        <Link
+        <TransitionLink
           href="/"
           className={cn(
             "hidden rounded border px-4 py-2 font-mono text-xs uppercase tracking-widest transition-all md:block",
@@ -87,7 +87,7 @@ export function Navbar() {
           )}
         >
           Re-select Pathway
-        </Link>
+        </TransitionLink>
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -122,7 +122,7 @@ export function Navbar() {
                 </li>
               ))}
               <li>
-                <Link
+                <TransitionLink
                   href="/"
                   onClick={() => setMobileOpen(false)}
                   className={cn(
@@ -132,7 +132,7 @@ export function Navbar() {
                   )}
                 >
                   Re-select Pathway
-                </Link>
+                </TransitionLink>
               </li>
             </ul>
           </motion.div>

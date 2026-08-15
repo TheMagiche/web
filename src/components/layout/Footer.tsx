@@ -10,6 +10,7 @@ import {
   LinkedInIcon,
   TwitterIcon,
 } from "@/components/ui/SocialIcons";
+import { TransitionLink } from "@/components/ui/TransitionLink";
 
 const socialLinks = [
   { icon: GitHubIcon, href: siteConfig.github, label: "GitHub" },
@@ -37,7 +38,7 @@ export function Footer() {
             <p className="mt-1 font-mono text-xs text-muted">
               Sequence 0 · {selected.name} Pathway
             </p>
-            <a
+            <TransitionLink
               href="/"
               className={cn(
                 "mt-4 inline-block font-mono text-[10px] uppercase tracking-[0.28em] transition-colors",
@@ -46,7 +47,7 @@ export function Footer() {
               )}
             >
               Reselect Pathway
-            </a>
+            </TransitionLink>
           </motion.div>
 
           <div className="flex items-center gap-6">

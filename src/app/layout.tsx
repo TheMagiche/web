@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Cinzel, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { PathwayProvider } from "@/components/providers/PathwayProvider";
+import {
+  SceneContent,
+  SceneTransitionProvider,
+} from "@/components/providers/SceneTransitionProvider";
 import { SceneBackground } from "@/components/effects/SceneBackground";
 import { ParticleBackground } from "@/components/effects/ParticleBackground";
 import { BackgroundAudio } from "@/components/effects/BackgroundAudio";
@@ -50,11 +54,15 @@ export default function RootLayout({
       <body className="scanline-overlay min-h-full bg-background font-sans text-foreground">
         <div className="noise-overlay" />
         <PathwayProvider>
-          <SceneBackground />
-          <ParticleBackground />
-          <BackgroundAudio />
-          <Navbar />
-          {children}
+          <SceneTransitionProvider>
+            <SceneBackground />
+            <BackgroundAudio />
+            <SceneContent>
+              <ParticleBackground />
+              <Navbar />
+              {children}
+            </SceneContent>
+          </SceneTransitionProvider>
         </PathwayProvider>
       </body>
     </html>

@@ -232,6 +232,43 @@ body {
   display: none;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.7s;
+  animation-timing-function: ease-in-out;
+}
+
+::view-transition-old(scene-background) {
+  animation: scene-view-out 0.85s ease-in-out both;
+}
+
+::view-transition-new(scene-background) {
+  animation: scene-view-in 0.85s ease-in-out both;
+}
+
+@keyframes scene-view-out {
+  to {
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+@keyframes scene-view-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-old(scene-background),
+  ::view-transition-new(scene-background) {
+    animation-duration: 0.01ms !important;
+  }
+}
+
 .scanline-overlay::after {
   content: "";
   position: fixed;

@@ -36,6 +36,7 @@ export function PathwayProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (pathname === "/") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelected(defaultPathway);
       setHighlighted(defaultPathway);
       setHasChosen(false);

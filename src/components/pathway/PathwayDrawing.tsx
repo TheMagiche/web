@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { TypewriterText } from "@/components/effects/TypewriterText";
 import { PathwayTarotCard } from "@/components/pathway/PathwayTarotCard";
@@ -9,11 +8,12 @@ import { usePathway } from "@/components/providers/PathwayProvider";
 import { siteConfig } from "@/lib/data";
 import { getPathwayTheme } from "@/lib/pathwayTheme";
 import { pathwayChoices } from "@/lib/pathways";
+import { useSceneTransition } from "@/components/providers/SceneTransitionProvider";
 import { playPaperSlide } from "@/lib/sound";
 import { cn } from "@/lib/utils";
 
 export function PathwayDrawing() {
-  const router = useRouter();
+  const { navigate } = useSceneTransition();
   const { selected, hasChosen, selectPathway, highlightPathway } = usePathway();
   const [activeIndex, setActiveIndex] = useState(0);
   const dragOrigin = useRef<number | null>(null);
@@ -36,9 +36,9 @@ export function PathwayDrawing() {
     (id: string) => {
       playPaperSlide();
       selectPathway(id);
-      router.push("/home");
+      navigate("/home");
     },
-    [router, selectPathway]
+    [navigate, selectPathway]
   );
 
   useEffect(() => {
