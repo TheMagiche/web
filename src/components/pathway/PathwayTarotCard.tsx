@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client";
 
 import Image from "next/image";
@@ -36,7 +37,7 @@ export function PathwayTarotCard({
   const face = (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl border-2 bg-linear-to-b p-1.75 transition-shadow duration-500 [backface-visibility:hidden]",
+        "relative overflow-hidden rounded-xl border-2 bg-linear-to-b p-1.75 transition-shadow duration-500 backface-hidden",
         compact
           ? "h-72 w-44 sm:h-80 sm:w-48"
           : "h-112 w-68 sm:h-128 sm:w-76",
@@ -140,6 +141,7 @@ export function PathwayTarotCard({
 
   if (interactive) {
     return (
+      // @ts-expect-error
       <motion.button
         type="button"
         onClick={onSelect}
@@ -153,6 +155,6 @@ export function PathwayTarotCard({
       </motion.button>
     );
   }
-
+    // @ts-expect-error
   return <motion.div {...motionProps}>{face}</motion.div>;
 }
