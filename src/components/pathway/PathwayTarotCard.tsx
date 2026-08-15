@@ -16,6 +16,7 @@ interface PathwayTarotCardProps {
   active?: boolean;
   compact?: boolean;
   drawing?: boolean;
+  instant?: boolean;
   onSelect?: () => void;
 }
 
@@ -27,6 +28,7 @@ export function PathwayTarotCard({
   active = false,
   compact = false,
   drawing = false,
+  instant = false,
   onSelect,
 }: PathwayTarotCardProps) {
   const arcana = grimoireArcana[index % grimoireArcana.length];
@@ -125,7 +127,7 @@ export function PathwayTarotCard({
   );
 
   const motionProps = {
-    initial: { opacity: 0, y: 28, rotateY: 0 },
+    initial: instant ? false : { opacity: 0, y: 28, rotateY: 0 },
     animate: drawing
       ? { opacity: 1, y: 0, scale: 1.45, rotateY: 360 }
       : { opacity: 1, y: 0, scale: 1, rotateY: 0 },

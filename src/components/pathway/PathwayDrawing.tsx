@@ -136,7 +136,7 @@ export function PathwayDrawing() {
       </header>
 
       <div
-        className="relative z-10 mx-auto flex w-full max-w-4xl min-h-0 flex-1 items-center justify-center [perspective:1400px]"
+        className="relative z-10 mx-auto flex w-full max-w-4xl min-h-0 flex-1 items-center justify-center perspective-[1400px]"
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
       >
