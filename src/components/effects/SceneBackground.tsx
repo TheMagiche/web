@@ -6,13 +6,8 @@ import { usePathway } from "@/components/providers/PathwayProvider";
 import { useSceneTransition } from "@/components/providers/SceneTransitionProvider";
 import { cn } from "@/lib/utils";
 
-const sceneTransition = {
-  duration: 0.85,
-  ease: [0.22, 1, 0.36, 1] as const,
-};
-
 export function SceneBackground() {
-  const { displayPath, holding } = useSceneTransition();
+  const { displayPath, holding, cinematic } = useSceneTransition();
   const { selected } = usePathway();
   const isHome = displayPath === "/home";
 
@@ -26,10 +21,13 @@ export function SceneBackground() {
           <motion.div
             key={`home-${selected.id}`}
             className="absolute inset-0"
-            initial={{ opacity: 0, scale: 1.08 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={sceneTransition}
+            initial={cinematic ? { opacity: 0 } : { opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              duration: cinematic ? 0.8 : 0,
+              ease: [0.22, 1, 0.36, 1],
+            }}
           >
             <Image
               src="/sky.jpg"
@@ -44,10 +42,13 @@ export function SceneBackground() {
           <motion.div
             key="landing"
             className="absolute inset-0"
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.06 }}
-            transition={sceneTransition}
+            initial={cinematic ? { opacity: 0 } : { opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              duration: cinematic ? 0.8 : 0,
+              ease: [0.22, 1, 0.36, 1],
+            }}
           >
             <Image
               src="/seer.jpg"

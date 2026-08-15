@@ -12,10 +12,11 @@ import { usePathname, useRouter } from "next/navigation";
 import { navigateWithViewTransition } from "@/lib/viewTransition";
 import { cn } from "@/lib/utils";
 
-const HOLD_MS = 1000;
+const HOLD_MS = 2000;
 
 type SceneTransitionContextValue = {
   holding: boolean;
+  cinematic: boolean;
   displayPath: string;
   navigate: (href: string) => void;
 };
@@ -28,18 +29,31 @@ export function SceneTransitionProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [holding, setHolding] = useState(false);
+  const [cinematic, setCinematic] = useState(false);
   const [displayPath, setDisplayPath] = useState(pathname);
 
   useEffect(() => {
     if (holding && pathname === displayPath) {
-      const reveal = window.setTimeout(() => setHolding(false), 80);
+      const reveal = window.setTimeout(() => {
+        setHolding(false);
+        setCinematic(false);
+      }, 80);
       return () => window.clearTimeout(reveal);
     }
   }, [displayPath, holding, pathname]);
 
   const navigate = useCallback(
     (href: string) => {
+      if (href !== "/home") {
+        setCinematic(false);
+        setHolding(false);
+        setDisplayPath(href);
+        router.push(href);
+        return;
+      }
+
       setDisplayPath(href);
+      setCinematic(true);
       setHolding(true);
 
       window.setTimeout(() => {
@@ -53,7 +67,12 @@ export function SceneTransitionProvider({ children }: { children: ReactNode }) {
 
   return (
     <SceneTransitionContext.Provider
-      value={{ holding, displayPath: holding ? displayPath : pathname, navigate }}
+      value={{
+        holding,
+        cinematic,
+        displayPath: holding ? displayPath : pathname,
+        navigate,
+      }}
     >
       {children}
     </SceneTransitionContext.Provider>

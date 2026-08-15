@@ -56,9 +56,9 @@ export default function RootLayout({
         <PathwayProvider>
           <SceneTransitionProvider>
             <SceneBackground />
+            <ParticleBackground />
             <BackgroundAudio />
             <SceneContent>
-              <ParticleBackground />
               <Navbar />
               {children}
             </SceneContent>

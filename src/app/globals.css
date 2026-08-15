@@ -239,24 +239,22 @@ body {
 }
 
 ::view-transition-old(scene-background) {
-  animation: scene-view-out 0.85s ease-in-out both;
+  animation: scene-view-out 0.8s ease-in-out both;
 }
 
 ::view-transition-new(scene-background) {
-  animation: scene-view-in 0.85s ease-in-out both;
+  animation: scene-view-in 0.8s ease-in-out both;
 }
 
 @keyframes scene-view-out {
   to {
     opacity: 0;
-    filter: blur(8px);
   }
 }
 
 @keyframes scene-view-in {
   from {
     opacity: 0;
-    filter: blur(8px);
   }
 }
 
@@ -267,6 +265,22 @@ body {
   ::view-transition-new(scene-background) {
     animation-duration: 0.01ms !important;
   }
+}
+
+@keyframes mouse-burst {
+  0% {
+    transform: translate(-50%, -50%) scale(0.4);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(6);
+    opacity: 0;
+  }
+}
+
+.mouse-burst {
+  animation: mouse-burst 0.7s ease-out forwards;
+  box-shadow: 0 0 18px rgba(0, 245, 212, 0.35);
 }
 
 .scanline-overlay::after {
