@@ -23,14 +23,12 @@ interface SequenceChapterProps {
   rank: number;
   children?: ReactNode;
   bleed?: boolean;
-  cardMode?: "default" | "slot";
 }
 
 export function SequenceChapter({
   rank,
   children,
   bleed = false,
-  cardMode = "default",
 }: SequenceChapterProps) {
   const { selected } = usePathway();
   const theme = getPathwayTheme(selected.color);
@@ -97,22 +95,7 @@ export function SequenceChapter({
     </div>
   );
 
-  const card = cardMode === "slot" ? (
-    <div
-      id={`sequence-card-slot-${rank}`}
-      className="invisible flex shrink-0 justify-center"
-      aria-hidden
-    >
-      <PathwayTarotCard
-        pathway={selected}
-        index={cardIndex}
-        rank={rank}
-        active
-        selected
-        instant
-      />
-    </div>
-  ) : (
+  const card = (
     <motion.div
       className="flex shrink-0 justify-center perspective-[1400px]"
       initial={

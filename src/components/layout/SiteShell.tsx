@@ -9,7 +9,6 @@ import {
   ContactCorrespondences,
   ContactRitual,
 } from "@/components/sections/Contact";
-import { SequenceCardBridge } from "@/components/pathway/SequenceCardBridge";
 import { SequenceChapter } from "@/components/pathway/SequenceChapter";
 import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
 import { cn } from "@/lib/utils";
@@ -26,49 +25,43 @@ export function SiteShell({ projects }: SiteShellProps) {
   return (
     <>
       <main className="relative z-0 isolate">
-        <SequenceCardBridge ranks={[9, 8, 7]}>
-          <SequenceChapter rank={9} cardMode="slot" />
-          <SequenceChapter rank={8} cardMode="slot" />
-          <SequenceChapter rank={7} cardMode="slot">
-            <About />
-          </SequenceChapter>
-        </SequenceCardBridge>
-        <SequenceCardBridge ranks={[6, 5]}>
-          <SequenceChapter rank={6} cardMode="slot" />
-          <SequenceChapter rank={5} cardMode="slot">
-            <Skills />
-          </SequenceChapter>
-        </SequenceCardBridge>
+        <SequenceChapter rank={9} />
+        <SequenceChapter rank={8} />
+        <SequenceChapter rank={7}>
+          <About />
+        </SequenceChapter>
+        <SequenceChapter rank={6} />
+        <SequenceChapter rank={5}>
+          <Skills />
+        </SequenceChapter>
         <SequenceChapter rank={4} bleed>
           <Projects projects={projects} />
         </SequenceChapter>
-        <SequenceCardBridge ranks={[3, 2, 1, 0]}>
-          <SequenceChapter rank={3} cardMode="slot" />
-          <SequenceChapter rank={2} cardMode="slot">
-            <ContactCorrespondences />
-          </SequenceChapter>
-          <SequenceChapter rank={1} cardMode="slot">
-            <ContactRitual />
-          </SequenceChapter>
-          <SequenceChapter rank={0} cardMode="slot">
-            <div className="space-y-8">
-              <ContactAltar />
-              <TransitionLink
-                href="/"
-                className={cn(
-                  "inline-block rounded border px-6 py-3 font-mono text-xs uppercase tracking-widest transition-all",
-                  theme.border,
-                  theme.text,
-                  theme.borderHover,
-                  theme.hoverText,
-                  theme.buttonGlow
-                )}
-              >
-                Reselect Pathway
-              </TransitionLink>
-            </div>
-          </SequenceChapter>
-        </SequenceCardBridge>
+        <SequenceChapter rank={3} />
+        <SequenceChapter rank={2}>
+          <ContactCorrespondences />
+        </SequenceChapter>
+        <SequenceChapter rank={1}>
+          <ContactRitual />
+        </SequenceChapter>
+        <SequenceChapter rank={0}>
+          <div className="space-y-8">
+            <ContactAltar />
+            <TransitionLink
+              href="/"
+              className={cn(
+                "inline-block rounded border px-6 py-3 font-mono text-xs uppercase tracking-widest transition-all",
+                theme.border,
+                theme.text,
+                theme.borderHover,
+                theme.hoverText,
+                theme.buttonGlow
+              )}
+            >
+              Reselect Pathway
+            </TransitionLink>
+          </div>
+        </SequenceChapter>
       </main>
       <Footer />
     </>
