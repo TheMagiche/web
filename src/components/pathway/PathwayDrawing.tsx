@@ -12,6 +12,10 @@ import { useSceneTransition } from "@/components/providers/SceneTransitionProvid
 import { playPaperSlide } from "@/lib/sound";
 import { cn } from "@/lib/utils";
 
+function wrapIndex(index: number, length: number) {
+  return ((index % length) + length) % length;
+}
+
 export function PathwayDrawing() {
   const { navigate } = useSceneTransition();
   const { selected, hasChosen, selectPathway, highlightPathway } = usePathway();
@@ -20,18 +24,21 @@ export function PathwayDrawing() {
   const dragOrigin = useRef<number | null>(null);
   const didDrag = useRef(false);
 
+  const count = pathwayChoices.length;
+  const previousIndex = wrapIndex(activeIndex - 1, count);
+  const nextIndex = wrapIndex(activeIndex + 1, count);
   const active = pathwayChoices[activeIndex] ?? pathwayChoices[0];
-  const previous = pathwayChoices[activeIndex - 1];
-  const next = pathwayChoices[activeIndex + 1];
+  const previous = pathwayChoices[previousIndex];
+  const next = pathwayChoices[nextIndex];
   const theme = getPathwayTheme(active.color);
 
   const goToIndex = useCallback((index: number) => {
     if (drawing) return;
-    const next = Math.max(0, Math.min(pathwayChoices.length - 1, index));
-    if (next === activeIndex) return;
+    const wrapped = wrapIndex(index, pathwayChoices.length);
+    if (wrapped === activeIndex) return;
     playPaperSlide();
-    setActiveIndex(next);
-    const pathway = pathwayChoices[next];
+    setActiveIndex(wrapped);
+    const pathway = pathwayChoices[wrapped];
     if (pathway) highlightPathway(pathway.id);
   }, [activeIndex, drawing, highlightPathway]);
 
@@ -140,7 +147,7 @@ export function PathwayDrawing() {
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
       >
-        {previous && (
+        {previous && previous.id !== active.id && (
           <div
             className={cn(
               "pointer-events-auto absolute left-0 z-0 origin-center translate-x-[-18%] scale-[0.72] opacity-40 transition-all duration-300 hover:opacity-60 sm:translate-x-[-8%]",
@@ -149,9 +156,9 @@ export function PathwayDrawing() {
           >
             <PathwayTarotCard
               pathway={previous}
-              index={activeIndex - 1}
+              index={previousIndex}
               compact
-              onSelect={() => goToIndex(activeIndex - 1)}
+              onSelect={() => goToIndex(previousIndex)}
             />
           </div>
         )}
@@ -168,7 +175,7 @@ export function PathwayDrawing() {
           />
         </div>
 
-        {next && (
+        {next && next.id !== active.id && (
           <div
             className={cn(
               "pointer-events-auto absolute right-0 z-0 origin-center translate-x-[18%] scale-[0.72] opacity-40 transition-all duration-300 hover:opacity-60 sm:translate-x-[8%]",
@@ -177,9 +184,9 @@ export function PathwayDrawing() {
           >
             <PathwayTarotCard
               pathway={next}
-              index={activeIndex + 1}
+              index={nextIndex}
               compact
-              onSelect={() => goToIndex(activeIndex + 1)}
+              onSelect={() => goToIndex(nextIndex)}
             />
           </div>
         )}
