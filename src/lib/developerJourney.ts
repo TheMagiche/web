@@ -39,18 +39,18 @@ export function getDeveloperCopy(rank: number) {
     },
     2: {
       kicker: "A whisper",
-      heading: "Chant the honorific name",
-      body: `To reach me, perform the ritual. Chant the honorific name thrice, then choose a corresponding medium — I am open to collaborations, products, and new currents.`,
+      heading: "Choose a corresponding medium",
+      body: `These are the vessels through which a prayer can travel — WhatsApp, LinkedIn, Ko-fi, YouTube, GitHub, and the rumor of the city.`,
     },
     1: {
       kicker: "The last veil",
-      heading: "Close to the source",
-      body: `The work is no longer a list of skills. It is a voice and a practice: immersive web experiences at the intersection of code and mystery.`,
+      heading: "Perform the ritual",
+      body: `To pierce the digital fog and establish a connection, chant the honorific name thrice. Then choose a corresponding medium and state your prayer.`,
     },
     0: {
       kicker: "Sequence 0",
       heading: siteConfig.name,
-      body: `This is the seat of the current — a frontend developer who treats every project as a mystical undertaking, from the first potion to this authority.`,
+      body: `This is the seat of the current — the messenger, the realm, and the altar. The path is open to collaborations, products, and new currents.`,
     },
   };
 

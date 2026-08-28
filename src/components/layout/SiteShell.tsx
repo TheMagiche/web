@@ -4,7 +4,11 @@ import { Footer } from "@/components/layout/Footer";
 import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
-import { Contact } from "@/components/sections/Contact";
+import {
+  ContactAltar,
+  ContactCorrespondences,
+  ContactRitual,
+} from "@/components/sections/Contact";
 import { SequenceCardBridge } from "@/components/pathway/SequenceCardBridge";
 import { SequenceChapter } from "@/components/pathway/SequenceChapter";
 import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
@@ -41,23 +45,28 @@ export function SiteShell({ projects }: SiteShellProps) {
         <SequenceCardBridge ranks={[3, 2, 1, 0]}>
           <SequenceChapter rank={3} cardMode="slot" />
           <SequenceChapter rank={2} cardMode="slot">
-            <Contact />
+            <ContactCorrespondences />
           </SequenceChapter>
-          <SequenceChapter rank={1} cardMode="slot" />
+          <SequenceChapter rank={1} cardMode="slot">
+            <ContactRitual />
+          </SequenceChapter>
           <SequenceChapter rank={0} cardMode="slot">
-            <TransitionLink
-              href="/"
-              className={cn(
-                "inline-block rounded border px-6 py-3 font-mono text-xs uppercase tracking-widest transition-all",
-                theme.border,
-                theme.text,
-                theme.borderHover,
-                theme.hoverText,
-                theme.buttonGlow
-              )}
-            >
-              Reselect Pathway
-            </TransitionLink>
+            <div className="space-y-8">
+              <ContactAltar />
+              <TransitionLink
+                href="/"
+                className={cn(
+                  "inline-block rounded border px-6 py-3 font-mono text-xs uppercase tracking-widest transition-all",
+                  theme.border,
+                  theme.text,
+                  theme.borderHover,
+                  theme.hoverText,
+                  theme.buttonGlow
+                )}
+              >
+                Reselect Pathway
+              </TransitionLink>
+            </div>
           </SequenceChapter>
         </SequenceCardBridge>
       </main>

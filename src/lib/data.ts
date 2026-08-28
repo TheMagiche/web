@@ -19,9 +19,9 @@ export const siteConfig = {
 };
 
 export const honorificName = [
-  "The Magiche that doesn't belong to this era",
-  "The mysterious artisan above the gray fog",
-  "The King of Type and Motion who weaves good luck",
+  "The alchemist who weaves digital fronts",
+  "The mysterious coder above the digital fog",
+  "I am TheMagiche",
 ] as const;
 
 export function formatHonorificChant() {

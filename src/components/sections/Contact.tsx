@@ -30,11 +30,103 @@ const correspondenceIcons: Record<string, ComponentType<{ className?: string }>>
   twitter: TwitterIcon,
 };
 
-export function Contact() {
+export function ContactCorrespondences() {
+  const { theme } = usePathwayTheme();
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const handleCopyCorrespondence = async (id: string, value: string) => {
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch {
+      return;
+    }
+
+    playPaperSlide();
+    setCopiedId(id);
+    window.setTimeout(() => {
+      setCopiedId((current) => (current === id ? null : current));
+    }, 2200);
+  };
+
+  return (
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {ritualCorrespondences.map((item, index) => {
+        const Icon = correspondenceIcons[item.id];
+        const copied = copiedId === item.id;
+        const content = (
+          <>
+            <div className="flex items-start justify-between gap-3">
+              <div className={cn("rounded border p-2", theme.borderSoft, theme.bg)}>
+                {Icon ? <Icon className={cn("h-4 w-4", theme.text)} /> : null}
+              </div>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted/60">
+                {item.vessel}
+              </span>
+            </div>
+            <h3 className="mt-3 font-display text-base font-semibold tracking-wide">
+              {item.rite}
+            </h3>
+            <p className={cn("mt-1 font-mono text-xs", theme.text)}>
+              {copied ? "Name inscribed" : item.handle}
+            </p>
+            <p className="mt-2 text-xs leading-relaxed text-muted/70">
+              {item.description}
+            </p>
+          </>
+        );
+
+        const className = cn(
+          "glass w-full rounded-lg p-4 text-left transition-all duration-300",
+          theme.hoverGlow,
+          theme.borderHover
+        );
+        const label = `${item.rite}, ${item.vessel}: ${item.handle}`;
+
+        if (item.href) {
+          return (
+            <motion.a
+              key={item.id}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
+              className={className}
+            >
+              {content}
+            </motion.a>
+          );
+        }
+
+        return (
+          <motion.button
+            key={item.id}
+            type="button"
+            aria-label={`Inscribe ${label}`}
+            onClick={() =>
+              item.copyValue && handleCopyCorrespondence(item.id, item.copyValue)
+            }
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.05 }}
+            className={className}
+          >
+            {content}
+          </motion.button>
+        );
+      })}
+    </div>
+  );
+}
+
+export function ContactRitual() {
   const { theme } = usePathwayTheme();
   const [chanted, setChanted] = useState(false);
   const [activeLine, setActiveLine] = useState<number | null>(null);
-  const [copiedId, setCopiedId] = useState<string | null>(null);
   const chantRun = useRef(0);
 
   const handleChant = async () => {
@@ -61,20 +153,6 @@ export function Contact() {
     window.setTimeout(() => {
       if (chantRun.current === run) setChanted(false);
     }, 2800);
-  };
-
-  const handleCopyCorrespondence = async (id: string, value: string) => {
-    try {
-      await navigator.clipboard.writeText(value);
-    } catch {
-      return;
-    }
-
-    playPaperSlide();
-    setCopiedId(id);
-    window.setTimeout(() => {
-      setCopiedId((current) => (current === id ? null : current));
-    }, 2200);
   };
 
   return (
@@ -106,58 +184,16 @@ export function Contact() {
           </li>
           <li>
             <span className={theme.text}>III.</span> Speak the request into the
-            gray fog
+            digital fog
           </li>
         </ol>
-
-        <div className="flex items-center gap-3">
-          <div className={cn("rounded border p-2", theme.borderSoft, theme.bg)}>
-            <Mail className={cn("h-4 w-4", theme.text)} />
-          </div>
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-muted">
-              The Messenger
-            </p>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className={cn("text-sm transition-colors", theme.hoverText)}
-            >
-              {siteConfig.email}
-            </a>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <div className={cn("rounded border p-2", theme.borderSoft, theme.bg)}>
-            <MapPin className={cn("h-4 w-4", theme.text)} />
-          </div>
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-muted">
-              Realm
-            </p>
-            <p className="text-sm">Available Worldwide · Remote</p>
-          </div>
-        </div>
-
-        <div className="glass rounded-lg p-4">
-          <p className="font-mono text-xs leading-relaxed text-muted/70">
-            <span className={theme.text}>&gt;</span> Altar:{" "}
-            <span className={theme.text}>Open to opportunities</span>
-            <br />
-            <span className={theme.text}>&gt;</span> Response time:{" "}
-            <span className="text-foreground">Within 24 hours</span>
-            <br />
-            <span className={theme.text}>&gt;</span> Specialization:{" "}
-            <span className="text-foreground">Frontend · UI/UX · Motion</span>
-          </p>
-        </div>
       </motion.div>
 
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        className="space-y-4 md:col-span-3"
+        className="md:col-span-3"
       >
         <div className="glass relative overflow-hidden rounded-lg p-6">
           <span className="pointer-events-none absolute left-3 top-3 font-display text-[10px] text-accent-amber/50">
@@ -222,79 +258,73 @@ export function Contact() {
             )}
           </button>
         </div>
+      </motion.div>
+    </div>
+  );
+}
 
-        <div className="grid gap-3 sm:grid-cols-2">
-          {ritualCorrespondences.map((item, index) => {
-            const Icon = correspondenceIcons[item.id];
-            const copied = copiedId === item.id;
-            const content = (
-              <>
-                <div className="flex items-start justify-between gap-3">
-                  <div className={cn("rounded border p-2", theme.borderSoft, theme.bg)}>
-                    {Icon ? <Icon className={cn("h-4 w-4", theme.text)} /> : null}
-                  </div>
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted/60">
-                    {item.vessel}
-                  </span>
-                </div>
-                <h3 className="mt-3 font-display text-base font-semibold tracking-wide">
-                  {item.rite}
-                </h3>
-                <p className={cn("mt-1 font-mono text-xs", theme.text)}>
-                  {copied ? "Name inscribed" : item.handle}
-                </p>
-                <p className="mt-2 text-xs leading-relaxed text-muted/70">
-                  {item.description}
-                </p>
-              </>
-            );
+export function ContactAltar() {
+  const { theme } = usePathwayTheme();
 
-            const className = cn(
-              "glass w-full rounded-lg p-4 text-left transition-all duration-300",
-              theme.hoverGlow,
-              theme.borderHover
-            );
-            const label = `${item.rite}, ${item.vessel}: ${item.handle}`;
-
-            if (item.href) {
-              return (
-                <motion.a
-                  key={item.id}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className={className}
-                >
-                  {content}
-                </motion.a>
-              );
-            }
-
-            return (
-              <motion.button
-                key={item.id}
-                type="button"
-                aria-label={`Inscribe ${label}`}
-                onClick={() =>
-                  item.copyValue &&
-                  handleCopyCorrespondence(item.id, item.copyValue)
-                }
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className={className}
-              >
-                {content}
-              </motion.button>
-            );
-          })}
+  return (
+    <div className="grid gap-6 md:grid-cols-3">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="flex items-center gap-3"
+      >
+        <div className={cn("rounded border p-2", theme.borderSoft, theme.bg)}>
+          <Mail className={cn("h-4 w-4", theme.text)} />
         </div>
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-muted">
+            The Messenger
+          </p>
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className={cn("text-sm transition-colors", theme.hoverText)}
+          >
+            {siteConfig.email}
+          </a>
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.06 }}
+        className="flex items-center gap-3"
+      >
+        <div className={cn("rounded border p-2", theme.borderSoft, theme.bg)}>
+          <MapPin className={cn("h-4 w-4", theme.text)} />
+        </div>
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-muted">
+            Realm
+          </p>
+          <p className="text-sm">Available Worldwide · Remote</p>
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.12 }}
+        className="glass rounded-lg p-4"
+      >
+        <p className="font-mono text-xs leading-relaxed text-muted/70">
+          <span className={theme.text}>&gt;</span> Altar:{" "}
+          <span className={theme.text}>Open to opportunities</span>
+          <br />
+          <span className={theme.text}>&gt;</span> Response time:{" "}
+          <span className="text-foreground">Within 24 hours</span>
+          <br />
+          <span className={theme.text}>&gt;</span> Specialization:{" "}
+          <span className="text-foreground">Frontend · UI/UX · Motion</span>
+        </p>
       </motion.div>
     </div>
   );
