@@ -49,7 +49,7 @@ export function PathwayDrawing() {
       selectPathway(id);
       setDrawing(true);
       window.setTimeout(() => {
-        navigate("/home");
+        navigate("/home", id);
       }, 2100);
     },
     [drawing, navigate, selectPathway]

@@ -11,15 +11,33 @@ import {
 } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
+import {
+  getSceneTransitionMessage,
+  grimoireArcana,
+  sceneTransitionsMessages,
+} from "@/lib/data";
+import { pathwayChoices, type PathwayChoice } from "@/lib/pathways";
+import { usePathway } from "@/components/providers/PathwayProvider";
 import { cn } from "@/lib/utils";
 
-const HOLD_MS = 2000;
+function messageForPathway(pathway: PathwayChoice) {
+  const index = pathwayChoices.findIndex((item) => item.id === pathway.id);
+  const tarotName = index >= 0 ? grimoireArcana[index]?.name : undefined;
+  return (
+    (tarotName && getSceneTransitionMessage(tarotName)) ||
+    getSceneTransitionMessage(pathway.name) ||
+    sceneTransitionsMessages[0]?.message ||
+    ""
+  );
+}
+
+const HOLD_MS = 5000;
 
 type SceneTransitionContextValue = {
   holding: boolean;
   cinematic: boolean;
   displayPath: string;
-  navigate: (href: string) => void;
+  navigate: (href: string, pathwayId?: string) => void;
 };
 
 const SceneTransitionContext = createContext<SceneTransitionContextValue | null>(
@@ -29,11 +47,18 @@ const SceneTransitionContext = createContext<SceneTransitionContextValue | null>
 export function SceneTransitionProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
+  const { selected } = usePathway();
+  const selectedRef = useRef(selected);
   const [holding, setHolding] = useState(false);
   const [cinematic, setCinematic] = useState(false);
   const [displayPath, setDisplayPath] = useState(pathname);
+  const [transitionMessage, setTransitionMessage] = useState("");
   const pendingRef = useRef(false);
   const holdTimerRef = useRef<number>(0);
+
+  useEffect(() => {
+    selectedRef.current = selected;
+  }, [selected]);
 
   useEffect(() => {
     if (!holding || pathname !== displayPath || !pendingRef.current) return;
@@ -48,7 +73,7 @@ export function SceneTransitionProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const navigate = useCallback(
-    (href: string) => {
+    (href: string, pathwayId?: string) => {
       if (href !== "/home") {
         pendingRef.current = false;
         window.clearTimeout(holdTimerRef.current);
@@ -61,8 +86,13 @@ export function SceneTransitionProvider({ children }: { children: ReactNode }) {
 
       if (pendingRef.current) return;
 
+      const pathway =
+        pathwayChoices.find((item) => item.id === pathwayId) ??
+        selectedRef.current;
+
       pendingRef.current = true;
       setDisplayPath(href);
+      setTransitionMessage(messageForPathway(pathway));
       setCinematic(true);
       setHolding(true);
 
@@ -85,15 +115,15 @@ export function SceneTransitionProvider({ children }: { children: ReactNode }) {
       <AnimatePresence>
         {holding && (
           <motion.div
-            key="spectator-warning"
+            key={transitionMessage}
             className="pointer-events-none fixed inset-0 z-40 flex items-center justify-center px-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.55, delay: 0.15 }}
           >
-            <p className="font-display text-center text-2xl font-semibold tracking-[0.18em] text-foreground drop-shadow-[0_2px_24px_rgba(0,0,0,0.7)] md:text-4xl">
-              Beware of the spectator
+            <p className="font-display max-w-2xl text-center text-sm font-semibold leading-relaxed tracking-wide text-foreground drop-shadow-[0_2px_24px_rgba(0,0,0,0.7)] md:text-lg">
+              {transitionMessage}
             </p>
           </motion.div>
         )}
