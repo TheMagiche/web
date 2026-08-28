@@ -1,7 +1,7 @@
 "use client";
 
 import { Footer } from "@/components/layout/Footer";
-import { About } from "@/components/sections/About";
+import { About, Traits } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
 import {
@@ -26,9 +26,11 @@ export function SiteShell({ projects }: SiteShellProps) {
     <>
       <main className="relative z-0 isolate">
         <SequenceChapter rank={9} />
-        <SequenceChapter rank={8} />
-        <SequenceChapter rank={7}>
+        <SequenceChapter rank={8}>
           <About />
+        </SequenceChapter>
+        <SequenceChapter rank={7}>
+          <Traits />
         </SequenceChapter>
         <SequenceChapter rank={6} />
         <SequenceChapter rank={5}>
