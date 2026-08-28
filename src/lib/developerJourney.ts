@@ -39,8 +39,8 @@ export function getDeveloperCopy(rank: number) {
     },
     2: {
       kicker: "A whisper",
-      heading: "Let's build together",
-      body: `If a mystery needs solving, send a whisper. I am open to collaborations, products, and new currents — frontend, interface, and motion.`,
+      heading: "Chant the honorific name",
+      body: `To reach me, perform the ritual. Chant the honorific name thrice, then choose a corresponding medium — I am open to collaborations, products, and new currents.`,
     },
     1: {
       kicker: "The last veil",

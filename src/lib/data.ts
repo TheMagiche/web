@@ -8,8 +8,92 @@ export const siteConfig = {
   github: "https://github.com/TheMagiche",
   githubUsername: "TheMagiche",
   linkedin: "https://linkedin.com/in/themagiche",
+  linkedinUsername: "themagiche",
   twitter: "https://twitter.com/themagiche",
+  twitterUsername: "themagiche",
+  youtube: "https://youtube.com/@themagiche",
+  youtubeUsername: "themagiche",
+  kofi: "https://ko-fi.com/theMagiche",
+  kofiUsername: "theMagiche",
+  whatsappUsername: "themagiche",
 };
+
+export const honorificName = [
+  "The Magiche that doesn't belong to this era",
+  "The mysterious artisan above the gray fog",
+  "The King of Type and Motion who weaves good luck",
+] as const;
+
+export function formatHonorificChant() {
+  return honorificName
+    .map((line, index) =>
+      index === honorificName.length - 1 ? `${line}.` : `${line};`
+    )
+    .join("\n");
+}
+
+export type RitualCorrespondence = {
+  id: string;
+  rite: string;
+  vessel: string;
+  handle: string;
+  href: string | null;
+  copyValue?: string;
+  description: string;
+};
+
+export const ritualCorrespondences: RitualCorrespondence[] = [
+  {
+    id: "whatsapp",
+    rite: "The Whisper",
+    vessel: "WhatsApp",
+    handle: `@${siteConfig.whatsappUsername}`,
+    href: null,
+    copyValue: siteConfig.whatsappUsername,
+    description:
+      "A prayer that crosses the spirit world. Inscribe this name, then seek it in the messenger.",
+  },
+  {
+    id: "linkedin",
+    rite: "The Contract",
+    vessel: "LinkedIn",
+    handle: siteConfig.linkedinUsername,
+    href: siteConfig.linkedin,
+    description: "The seal of the mundane world — a formal summons.",
+  },
+  {
+    id: "kofi",
+    rite: "The Offering",
+    vessel: "Ko-fi",
+    handle: siteConfig.kofiUsername,
+    href: siteConfig.kofi,
+    description: "Gold pounds laid upon the altar. The ritual accepts tribute.",
+  },
+  {
+    id: "youtube",
+    rite: "The Scrying Mirror",
+    vessel: "YouTube",
+    handle: `@${siteConfig.youtubeUsername}`,
+    href: siteConfig.youtube,
+    description: "Visions projected through the fog of the spirit world.",
+  },
+  {
+    id: "github",
+    rite: "The Grimoire",
+    vessel: "GitHub",
+    handle: siteConfig.githubUsername,
+    href: siteConfig.github,
+    description: "The living record of spells committed to the void.",
+  },
+  {
+    id: "twitter",
+    rite: "The Rumor",
+    vessel: "X",
+    handle: `@${siteConfig.twitterUsername}`,
+    href: siteConfig.twitter,
+    description: "Whispers that travel the city faster than a messenger.",
+  },
+];
 
 export const hiddenRepos = ["web", "myweb"];
 
