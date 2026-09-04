@@ -109,67 +109,43 @@ export const outsiderSymbols = [
   "/outsider/Chaos_Primogenitor_Symbol2.webp",
 ] as const;
 
-// replace with websites i've hosted
+// Relics of the Beyond — sites conjured from the spirit world.
 export const potions = [
   {
-    name: "Codex Potion",
-    sequence: "Sequence 9 → Sequence 0",
-    domain: "Frontend Architecture",
+    name: "Betting Strategy Analyzer",
+    sequence: "Sequence 9",
+    domain: "betcalc.work.gd",
+    url: "https://betcalc.work.gd",
     skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
     color: "violet",
-    symbol: outsiderSymbols[0],
+    image: "betcalc.webp",
   },
   {
-    name: "Fluidity Potion",
-    sequence: "Sequence 8 → Sequence 1",
-    domain: "Motion & Interaction",
-    skills: ["Framer Motion", "GSAP", "Three.js", "WebGL"],
-    color: "cyan",
-    symbol: outsiderSymbols[1],
-  },
-  {
-    name: "Optimizer Potion",
-    sequence: "Sequence 7 → Sequence 2",
-    domain: "Performance & Optimization",
-    skills: ["Core Web Vitals", "SSR/SSG", "Bundle Analysis", "Caching"],
-    color: "amber",
-    symbol: outsiderSymbols[2],
-  },
-  {
-    name: "Designer Potion",
-    sequence: "Sequence 6 → Sequence 3",
-    domain: "Design Systems",
-    skills: ["Component Libraries", "Storybook", "Figma", "Accessibility"],
-    color: "rose",
-    symbol: outsiderSymbols[3],
-  },
-];
-
-// replace potions with websites i've hosted (visuals of the websites)
-export const hostedWebsites = [
-  {
-    name: "Betting Strategy Analyzer",
-    image: 'website/betcalc.webp',
-    domain: "betcalc.work.gd",
-    stack: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    name: "Lord of the mysteries",
-    image: 'website/lotmdnd.webp',
+    name: "Lord of the Mysteries",
+    sequence: "Sequence 8",
     domain: "lotmdnd.work.gd",
-    stack: ["React", "batchfile", "TypeScript", "Shell"],
+    url: "https://lotmdnd.work.gd",
+    skills: ["React", "Batchfile", "TypeScript", "Shell"],
+    color: "cyan",
+    image: "lotmdnd.webp",
   },
   {
     name: "Yinke Africa",
-    image: 'website/yinke.webp',
+    sequence: "Sequence 7",
     domain: "yinke-next.vercel.app",
-    stack: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    url: "https://yinke-next.vercel.app",
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    color: "amber",
+    image: "yinke.webp",
   },
   {
     name: "SP-analytics",
-    image: 'website/spanalytics.webp',
+    sequence: "Sequence 6",
     domain: "sp-analytics-iota.vercel.app",
-    stack: ["React", "Next.js", "TypeScript", "Mui"],
+    url: "https://sp-analytics-iota.vercel.app",
+    skills: ["React", "Next.js", "TypeScript", "MUI"],
+    color: "rose",
+    image: "spanalytics.webp",
   },
 ];
 
