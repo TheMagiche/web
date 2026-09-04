@@ -23,9 +23,9 @@ export function getDeveloperCopy(rank: number) {
       body: `I move between products, systems, and teams without losing the current underneath — typed, tested, and tuned for whatever the realm demands.`,
     },
     5: {
-      kicker: "Potions",
-      heading: "Potions of power",
-      body: `Architecture, motion, performance, and design language. These are the potions I have already brewed: the stack I carry toward Sequence 0.`,
+      kicker: "Visions",
+      heading: "Visualizing the unseen",
+      body: `Architecture, motion, performance, and design language. These are the some of the visuals I have already brewed: the stack I carry toward Sequence 0.`,
     },
     4: {
       kicker: "The work",

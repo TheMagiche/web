@@ -109,6 +109,7 @@ export const outsiderSymbols = [
   "/outsider/Chaos_Primogenitor_Symbol2.webp",
 ] as const;
 
+// replace with websites i've hosted
 export const potions = [
   {
     name: "Codex Potion",
@@ -144,9 +145,37 @@ export const potions = [
   },
 ];
 
+// replace potions with websites i've hosted (visuals of the websites)
+export const hostedWebsites = [
+  {
+    name: "Betting Strategy Analyzer",
+    image: 'website/betcalc.webp',
+    domain: "betcalc.work.gd",
+    stack: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+  },
+  {
+    name: "Lord of the mysteries",
+    image: 'website/lotmdnd.webp',
+    domain: "lotmdnd.work.gd",
+    stack: ["React", "batchfile", "TypeScript", "Shell"],
+  },
+  {
+    name: "Yinke Africa",
+    image: 'website/yinke.webp',
+    domain: "yinke-next.vercel.app",
+    stack: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+  },
+  {
+    name: "SP-analytics",
+    image: 'website/spanalytics.webp',
+    domain: "sp-analytics-iota.vercel.app",
+    stack: ["React", "Next.js", "TypeScript", "Mui"],
+  },
+];
+
 export const navLinks = [
   { label: "Origin", href: "/home#sequence-7" },
-  { label: "Potions", href: "/home#sequence-5" },
+  { label: "Visions", href: "/home#sequence-5" },
   { label: "Grimoire", href: "/home#sequence-4" },
   { label: "Contact", href: "/home#sequence-2" },
 ];

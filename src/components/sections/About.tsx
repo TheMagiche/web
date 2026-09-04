@@ -1,9 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Eye, Code2, Layers, Container, Cloud, Server, Rocket, BarChart2, Sparkles, GitBranch, Globe } from "lucide-react";
+import { Eye, Code2, Layers, Container, Cloud, Server, Rocket, Sparkles, GitBranch, Globe } from "lucide-react";
 import { MysticalCard } from "@/components/ui/MysticalCard";
 import { usePathway } from "@/components/providers/PathwayProvider";
+import { getPathwayTheme } from "@/lib/pathwayTheme";
+import type { PathwayColor } from "@/lib/pathways";
+import { cn } from "@/lib/utils";
 
 const traits = [
   {
@@ -82,6 +85,7 @@ const devOpsSkills = [
 
 export function About() {
   const { selected } = usePathway();
+  const theme = getPathwayTheme(selected.color as PathwayColor);
 
   return (
     <motion.div
@@ -109,7 +113,8 @@ export function About() {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="space-y-4 pt-6 border-t border-border/50"
       >
-        <h3 className="font-display text-lg font-semibold tracking-wide text-gradient">
+        <h3 className="font-display text-lg font-semibold tracking-wide"
+            style={{ textShadow: theme.titleShadow }}>
           Frontend & Development Stack
         </h3>
         <p className="text-sm text-muted/80">
@@ -124,10 +129,17 @@ export function About() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
-              className="group relative rounded-xl border border-border/50 bg-surface-elevated/50 p-4 transition-all hover:border-accent-violet/50 hover:bg-accent-violet/5"
+              className={cn(
+                "group relative rounded-xl border border-border/50 bg-surface-elevated/50 p-4 transition-all",
+                theme.hoverGlow
+              )}
             >
-              <div className="rounded-lg border border-accent-violet/20 bg-accent-violet/10 p-3">
-                <skill.icon className="h-6 w-6 text-accent-violet" />
+              <div className={cn(
+                "rounded-lg border p-3",
+                theme.borderSoft,
+                theme.bg
+              )}>
+                <skill.icon className={cn("h-6 w-6", theme.text)} />
               </div>
               <h4 className="mt-3 font-medium tracking-wide">{skill.title}</h4>
               <p className="mt-1 text-xs text-muted/70">{skill.description}</p>
@@ -154,7 +166,8 @@ export function About() {
         transition={{ duration: 0.6, delay: 0.4 }}
         className="space-y-4 pt-6 border-t border-border/50"
       >
-        <h3 className="font-display text-lg font-semibold tracking-wide text-gradient">
+        <h3 className="font-display text-lg font-semibold tracking-wide"
+            style={{ textShadow: theme.titleShadow }}>
           Infrastructure & DevOps
         </h3>
         <p className="text-sm text-muted/80">
@@ -169,10 +182,17 @@ export function About() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
-              className="group relative rounded-xl border border-border/50 bg-surface-elevated/50 p-4 transition-all hover:border-accent-violet/50 hover:bg-accent-violet/5"
+              className={cn(
+                "group relative rounded-xl border border-border/50 bg-surface-elevated/50 p-4 transition-all",
+                theme.hoverGlow
+              )}
             >
-              <div className="rounded-lg border border-accent-violet/20 bg-accent-violet/10 p-3">
-                <skill.icon className="h-6 w-6 text-accent-violet" />
+              <div className={cn(
+                "rounded-lg border p-3",
+                theme.borderSoft,
+                theme.bg
+              )}>
+                <skill.icon className={cn("h-6 w-6", theme.text)} />
               </div>
               <h4 className="mt-3 font-medium tracking-wide">{skill.title}</h4>
               <p className="mt-1 text-xs text-muted/70">{skill.description}</p>
@@ -195,16 +215,24 @@ export function About() {
 }
 
 export function Traits() {
+  const { selected } = usePathway();
+  const theme = getPathwayTheme(selected.color as PathwayColor);
+
   return (
     <div className="space-y-4">
       {traits.map((trait, i) => (
-        <MysticalCard key={trait.title} glowColor="violet" delay={i * 0.15}>
+        <MysticalCard key={trait.title} glowColor={selected.color as PathwayColor} delay={i * 0.15}>
           <div className="flex items-start gap-4">
-            <div className="rounded border border-accent-violet/20 bg-accent-violet/10 p-2">
-              <trait.icon className="h-5 w-5 text-accent-violet" />
+            <div className={cn(
+              "rounded border p-2",
+              theme.borderSoft,
+              theme.bg
+            )}>
+              <trait.icon className={cn("h-5 w-5", theme.text)} />
             </div>
             <div>
-              <h3 className="font-display text-lg font-semibold tracking-wide">
+              <h3 className="font-display text-lg font-semibold tracking-wide"
+                  style={{ textShadow: theme.titleShadow }}>
                 {trait.title}
               </h3>
               <p className="mt-1 text-sm leading-relaxed text-muted">
