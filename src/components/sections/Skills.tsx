@@ -11,71 +11,88 @@ import { cn } from "@/lib/utils";
 export function Skills() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
-          {displayedPotions.map((pathway, i) => {
-            const theme = getPathwayTheme(pathway.color as PathwayColor);
+      {displayedPotions.map((site, i) => {
+        const theme = getPathwayTheme(site.color as PathwayColor);
+        const href = site.url ?? "#";
+        const previewSrc = `/websites/${site.image}`;
 
-            return (
-              <MysticalCard
-                key={pathway.name}
-                glowColor={pathway.color as PathwayColor}
-                delay={i * 0.1}
+        return (
+          <MysticalCard
+            key={site.name}
+            glowColor={site.color as PathwayColor}
+            delay={i * 0.1}
+          >
+            <h3 className="mt-4 font-display text-xl font-bold tracking-wide">
+              {site.name}
+            </h3>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                "mt-1 inline-block font-mono text-xs transition-colors hover:underline",
+                theme.text
+              )}
+            >
+              {site.domain} ↗
+            </a>
+
+            <div
+              className={cn(
+                "group relative mt-4 overflow-hidden rounded-md border",
+                theme.borderSoft
+              )}
+            >
+              <div
+                className={cn(
+                  "relative aspect-video w-full overflow-hidden",
+                  theme.bg
+                )}
               >
-                <div className="flex items-start justify-between">
-                  <div
-                    className={cn(
-                      "relative h-16 w-16 overflow-hidden rounded-full border",
-                      theme.borderSoft,
-                      theme.bg
-                    )}
-                  >
-                    <Image
-                      src={pathway.symbol}
-                      alt={`${pathway.name} symbol`}
-                      fill
-                      sizes="64px"
-                      className="object-cover mix-blend-screen"
-                    />
-                  </div>
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted/60">
-                    {pathway.sequence}
-                  </span>
-                </div>
+                <Image
+                  src={previewSrc}
+                  alt={`${site.name} preview`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-top opacity-90 mix-blend-screen blur-[0px] saturate-110 scale-105"
+                  priority={i === 0}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background/55" />
+              </div>
 
-                <h3 className="mt-4 font-display text-xl font-bold tracking-wide">
-                  {pathway.name}
-                </h3>
-                <p className={cn("mt-1 text-sm font-mono", theme.text)}>
-                  {pathway.domain}
-                </p>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "absolute inset-0 z-20 flex items-center justify-center bg-background/60 font-mono text-[10px] uppercase tracking-widest opacity-0 transition-opacity duration-300 group-hover:opacity-100",
+                  theme.text
+                )}
+              >
+                <span className="rounded border border-current px-3 py-1">
+                  Enter the Relic ↗
+                </span>
+              </a>
+            </div>
 
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {pathway.skills.map((skill) => (
-                    <motion.span
-                      key={skill}
-                      whileHover={{ scale: 1.05 }}
-                      className={cn(
-                        "rounded border px-2.5 py-1 font-mono text-xs",
-                        theme.borderSoft,
-                        theme.text
-                      )}
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
-                </div>
-
-                <div className="mt-4 h-1 overflow-hidden rounded-full bg-surface">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${85 - i * 5}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.3 + i * 0.1 }}
-                    className="h-full rounded-full bg-linear-to-r from-accent-violet to-accent-cyan"
-                  />
-                </div>
-              </MysticalCard>
-            );
-          })}
-        </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {site.skills.map((skill) => (
+                <motion.span
+                  key={skill}
+                  whileHover={{ scale: 1.05 }}
+                  className={cn(
+                    "rounded border px-2.5 py-1 font-mono text-xs",
+                    theme.borderSoft,
+                    theme.text
+                  )}
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </MysticalCard>
+        );
+      })}
+    </div>
   );
 }

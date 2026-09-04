@@ -156,8 +156,8 @@ export function ContactRitual() {
   };
 
   return (
-    <div className="grid gap-12 md:grid-cols-5">
-      <motion.div
+    <div className="grid">
+      {/* <motion.div
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
@@ -187,7 +187,7 @@ export function ContactRitual() {
             digital fog
           </li>
         </ol>
-      </motion.div>
+      </motion.div> */}
 
       <motion.div
         initial={{ opacity: 0, x: 20 }}

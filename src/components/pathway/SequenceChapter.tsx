@@ -204,7 +204,7 @@ export function SequenceChapter({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
+          className="relative bottom-8 left-1/2 z-10 -translate-x-1/2 mt-10"
         >
           <div className="flex flex-col items-center gap-2 text-muted">
             <span className="font-mono text-[10px] uppercase tracking-[0.3em]">
