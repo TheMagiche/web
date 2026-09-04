@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Eye, Code2, Layers } from "lucide-react";
+import { Eye, Code2, Layers, Container, Cloud, Server, Rocket } from "lucide-react";
 import { MysticalCard } from "@/components/ui/MysticalCard";
 import { usePathway } from "@/components/providers/PathwayProvider";
 
@@ -23,6 +23,33 @@ const traits = [
     title: "The Architect",
     description:
       "Building systems that scale from a single page to entire design ecosystems without losing coherence.",
+  },
+];
+
+const devOpsSkills = [
+  {
+    icon: Container,
+    title: "Containerization",
+    description: "Encapsulating spells in portable vessels",
+    tools: ["Docker", "Docker Compose", "Containerd", "Podman"],
+  },
+  {
+    icon: Cloud,
+    title: "Cloud Platforms",
+    description: "Summoning power from the ethereal realms",
+    tools: ["AWS (EC2, S3, RDS)", "DigitalOcean", "Vultr", "Hetzner"],
+  },
+  {
+    icon: Server,
+    title: "VPS & Bare Metal",
+    description: "Commanding the iron foundations directly",
+    tools: ["Ubuntu/Debian", "Nginx", "Systemd", "SSH Hardening"],
+  },
+  {
+    icon: Rocket,
+    title: "Deployment & CI/CD",
+    description: "Automating the ritual of release",
+    tools: ["Coolify", "GitHub Actions", "GitLab CI", "Watchtower"],
   },
 ];
 
@@ -48,10 +75,10 @@ export function About() {
       </p>
       <p className="leading-relaxed text-muted/80">
         With expertise spanning React, Next.js, and the entire modern
-        frontend stack, I craft digital experiences that don&apos;t just
+        frontend stack, I craft digital experiences that don't just
         function — they{" "}
         <em className="text-accent-violet not-italic">resonate</em>. Whether
-        it&apos;s a blazing-fast e-commerce platform or an immersive data
+        it's a blazing-fast e-commerce platform or an immersive data
         dashboard, I approach each challenge as a new pathway to ascend.
       </p>
       <div className="flex flex-wrap gap-3 pt-2">
@@ -66,6 +93,51 @@ export function About() {
           )
         )}
       </div>
+
+      {/* DevOps & Infrastructure */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "0px 0px -100px" }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="space-y-4 pt-6 border-t border-border/50"
+      >
+        <h3 className="font-display text-lg font-semibold tracking-wide text-gradient">
+          Infrastructure & DevOps
+        </h3>
+        <p className="text-sm text-muted/80">
+          From local cauldrons to cloud citadels — orchestrating the foundations that
+          keep the spells running.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {devOpsSkills.map((skill, i) => (
+            <motion.div
+              key={skill.title}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
+              className="group relative rounded-xl border border-border/50 bg-surface-elevated/50 p-4 transition-all hover:border-accent-violet/50 hover:bg-accent-violet/5"
+            >
+              <div className="rounded-lg border border-accent-violet/20 bg-accent-violet/10 p-3">
+                <skill.icon className="h-6 w-6 text-accent-violet" />
+              </div>
+              <h4 className="mt-3 font-medium tracking-wide">{skill.title}</h4>
+              <p className="mt-1 text-xs text-muted/70">{skill.description}</p>
+              <div className="mt-3 flex flex-wrap gap-1">
+                {skill.tools.map((tool) => (
+                  <span
+                    key={tool}
+                    className="rounded border border-border bg-surface px-2 py-0.5 font-mono text-[10px] text-muted/60"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
