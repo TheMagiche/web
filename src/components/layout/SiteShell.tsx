@@ -1,7 +1,8 @@
 "use client";
 
 import { Footer } from "@/components/layout/Footer";
-import { About, Traits } from "@/components/sections/About";
+import { About } from "@/components/sections/About";
+import { BlogEntries } from "@/components/sections/BlogEntries";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
 import {
@@ -14,12 +15,14 @@ import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
 import { cn } from "@/lib/utils";
 import type { GithubProject } from "@/lib/github";
 import { TransitionLink } from "@/components/ui/TransitionLink";
+import type { BlogPost } from "@/lib/posts";
 
 interface SiteShellProps {
   projects: GithubProject[];
+  posts: BlogPost[];
 }
 
-export function SiteShell({ projects }: SiteShellProps) {
+export function SiteShell({ projects, posts }: SiteShellProps) {
   const { theme } = usePathwayTheme();
 
   return (
@@ -30,7 +33,7 @@ export function SiteShell({ projects }: SiteShellProps) {
           <About />
         </SequenceChapter>
         <SequenceChapter rank={7}>
-          <Traits />
+          <BlogEntries posts={posts} />
         </SequenceChapter>
         <SequenceChapter rank={6} />
         <SequenceChapter rank={5}>
