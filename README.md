@@ -38,8 +38,11 @@ credentials, set the repository owner and slug, and generate an
 
 For local OAuth, configure the GitHub app with homepage
 `http://localhost:3000/` and callback URL
-`http://localhost:3000/api/outstatic/callback`. The bare `/api/outstatic` URL is
-an internal API endpoint and is not the CMS page; use `/outstatic` to sign in.
+`http://localhost:3000/api/outstatic/callback`. Then open `/outstatic` to sign
+in. The `/outstatic` URL is the dashboard page, while `/api/outstatic/callback`
+is the OAuth handler. Do not copy the `state` query parameter into
+`OST_TOKEN_SECRET`: Outstatic generates that one-time value and validates it
+using the fixed secret.
 
 ## Deploy
 
