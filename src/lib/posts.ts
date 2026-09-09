@@ -9,7 +9,7 @@ export interface BlogPost {
 
 export function getBlogPosts(): BlogPost[] {
   try {
-    const documents = getDocuments("posts", [
+    const documents = getDocuments("marks-journals", [
       "title",
       "slug",
       "publishedAt",
