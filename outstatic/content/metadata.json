@@ -1,11 +1,11 @@
 {
-  "commit": "",
-  "generated": "2026-09-09T19:44:50.065Z",
+  "commit": "a6af9dfa7ed50144a775fa442e53031f5e4d6818",
+  "generated": "2026-09-09T22:02:45.863Z",
   "metadata": [
     {
       "__outstatic": {
-        "commit": "",
-        "hash": "363381023",
+        "commit": "a6af9dfa7ed50144a775fa442e53031f5e4d6818",
+        "hash": "1208001731",
         "path": "outstatic/content/marks-journals/the-beginning.mdx"
       },
       "author": {
