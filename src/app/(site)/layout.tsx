@@ -9,7 +9,7 @@ import { SceneBackground } from "@/components/effects/SceneBackground";
 import { ParticleBackground } from "@/components/effects/ParticleBackground";
 import { BackgroundAudio } from "@/components/effects/BackgroundAudio";
 import { Navbar } from "@/components/layout/Navbar";
-import "./globals.css";
+import "../globals.css";
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
+export default function SiteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
