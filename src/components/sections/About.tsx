@@ -1,33 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Eye, Code2, Layers, Container, Cloud, Server, Rocket, Sparkles, GitBranch, Globe } from "lucide-react";
-import { MysticalCard } from "@/components/ui/MysticalCard";
+import { Code2, Container, Cloud, Server, Rocket, Sparkles, GitBranch, Globe } from "lucide-react";
 import { usePathway } from "@/components/providers/PathwayProvider";
 import { getPathwayTheme } from "@/lib/pathwayTheme";
 import type { PathwayColor } from "@/lib/pathways";
 import { cn } from "@/lib/utils";
-
-const traits = [
-  {
-    icon: Eye,
-    title: "The Observer",
-    description:
-      "I perceive the invisible patterns in user behavior and translate them into interfaces that feel inevitable.",
-  },
-  {
-    icon: Code2,
-    title: "The Artificer",
-    description:
-      "Every component is a crafted artifact — typed, tested, and tuned for performance at scale.",
-  },
-  {
-    icon: Layers,
-    title: "The Architect",
-    description:
-      "Building systems that scale from a single page to entire design ecosystems without losing coherence.",
-  },
-];
 
 const frontendSkills = [
   {
@@ -214,34 +192,3 @@ export function About() {
   );
 }
 
-export function Traits() {
-  const { selected } = usePathway();
-  const theme = getPathwayTheme(selected.color as PathwayColor);
-
-  return (
-    <div className="space-y-4">
-      {traits.map((trait, i) => (
-        <MysticalCard key={trait.title} glowColor={selected.color as PathwayColor} delay={i * 0.15}>
-          <div className="flex items-start gap-4">
-            <div className={cn(
-              "rounded border p-2",
-              theme.borderSoft,
-              theme.bg
-            )}>
-              <trait.icon className={cn("h-5 w-5", theme.text)} />
-            </div>
-            <div>
-              <h3 className="font-display text-lg font-semibold tracking-wide"
-                  style={{ textShadow: theme.titleShadow }}>
-                {trait.title}
-              </h3>
-              <p className="mt-1 text-sm leading-relaxed text-muted">
-                {trait.description}
-              </p>
-            </div>
-          </div>
-        </MysticalCard>
-      ))}
-    </div>
-  );
-}

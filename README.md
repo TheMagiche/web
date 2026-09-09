@@ -10,6 +10,7 @@ A Lord of the Mysteries inspired cyberpunk portfolio built with Next.js, React, 
 - **Particles:** tsparticles
 - **Icons:** Lucide React
 - **Fonts:** Cinzel, Space Grotesk, JetBrains Mono
+- **CMS:** Outstatic, with Markdown content committed to GitHub
 
 ## Getting Started
 
@@ -25,6 +26,23 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - **Site content:** Edit `src/lib/data.ts` for personal info, skills, projects, and social links
 - **Theme colors:** Adjust CSS variables in `src/app/globals.css`
 - **Sections:** Components live in `src/components/sections/`
+
+## Blog CMS
+
+The journal is managed through the self-hosted Outstatic dashboard at
+`/outstatic`. Copy `.env.example` to `.env.local`, add a GitHub OAuth app's
+credentials, set the repository owner and slug, and generate an
+`OST_TOKEN_SECRET` before opening the dashboard. Published documents in
+`outstatic/content/posts` appear in the Sequence 7 journal and are available at
+`/blog/[slug]`.
+
+For local OAuth, configure the GitHub app with homepage
+`http://localhost:3000/` and callback URL
+`http://localhost:3000/api/outstatic/callback`. Then open `/outstatic` to sign
+in. The `/outstatic` URL is the dashboard page, while `/api/outstatic/callback`
+is the OAuth handler. Do not copy the `state` query parameter into
+`OST_TOKEN_SECRET`: Outstatic generates that one-time value and validates it
+using the fixed secret.
 
 ## Deploy
 
