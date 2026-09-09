@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getDocumentBySlug, getDocumentSlugs } from "outstatic/server";
 import { TransitionLink } from "@/components/ui/TransitionLink";
+import { cn } from "@/lib/utils";
 
 interface BlogPageProps {
   params: Promise<{ slug: string }>;
@@ -12,6 +13,7 @@ export function generateStaticParams() {
 
 export default async function BlogPostPage({ params }: BlogPageProps) {
   const { slug } = await params;
+
   const post = getDocumentBySlug("marks-journals", slug, [
     "title",
     "publishedAt",
@@ -28,10 +30,10 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
       >
         ← Return to the journal
       </TransitionLink>
-      <article className="blog-parchment mt-12 h-[calc(100vh-12rem)] overflow-y-auto rounded-sm border p-6 md:p-10">
+      <article className="blog-parchment blog-scroll mt-12 h-[calc(100vh-12rem)] overflow-y-auto rounded-sm border p-6 md:p-10">
         <time
           dateTime={new Date(post.publishedAt).toISOString()}
-          className="font-mono text-xs uppercase tracking-[0.3em] text-accent-cyan"
+          className={cn("font-mono text-[10px] uppercase")}
         >
           {new Intl.DateTimeFormat("en", {
             year: "numeric",

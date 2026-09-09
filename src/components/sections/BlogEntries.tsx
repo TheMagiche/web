@@ -50,7 +50,7 @@ export function BlogEntries({ posts }: BlogEntriesProps) {
           </p>
         </div>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="tarot-scroller flex cursor-grab snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-1 pb-5 outline-none select-none [overflow-anchor:none]">
           {posts.map((post, index) => (
             <motion.a
               key={post.slug}
@@ -60,14 +60,14 @@ export function BlogEntries({ posts }: BlogEntriesProps) {
               viewport={{ once: true, margin: "0px 0px -80px" }}
               transition={{ duration: 0.45, delay: index * 0.08 }}
               className={cn(
-                "blog-parchment group relative rounded-lg border border-border/60 bg-surface-elevated/50 p-5 transition-all",
+                "group relative w-[min(82vw,24rem)] shrink-0 snap-center rounded-lg border border-border/60 bg-surface-elevated/50 p-5 transition-all",
                 theme.hoverGlow
               )}
             >
               <div className="flex items-start justify-between gap-4">
                 <time
                   dateTime={post.publishedAt}
-                  className={cn("font-mono text-[10px] uppercase tracking-[0.2em]", theme.text)}
+                  className={cn("font-mono text-[10px] uppercase")}
                 >
                   {new Intl.DateTimeFormat("en", {
                     year: "numeric",
@@ -77,8 +77,7 @@ export function BlogEntries({ posts }: BlogEntriesProps) {
                 </time>
                 <ArrowUpRight
                   className={cn(
-                    "h-4 w-4 text-muted transition-transform group-hover:-translate-y-1 group-hover:translate-x-1",
-                    theme.text
+                    "h-4 w-4 text-muted transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
                   )}
                   aria-hidden="true"
                 />
@@ -89,7 +88,7 @@ export function BlogEntries({ posts }: BlogEntriesProps) {
               <p className="mt-3 text-sm leading-relaxed text-muted/80">
                 {getExcerpt(post.content) || "A new fragment from the journal."}
               </p>
-              <span className={cn("mt-5 inline-block font-mono text-[10px] uppercase tracking-widest", theme.text)}>
+              <span className={cn("mt-5 inline-block font-mono text-[10px] uppercase")}>
                 Read entry
               </span>
             </motion.a>
