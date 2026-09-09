@@ -5,8 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Eye } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/data";
 import { usePathway } from "@/components/providers/PathwayProvider";
-import { useActiveSequenceRank } from "@/components/pathway/useActiveSequenceRank";
-import { getSequenceTitle } from "@/lib/pathways";
 import { cn } from "@/lib/utils";
 import { TransitionLink } from "@/components/ui/TransitionLink";
 import { usePathname } from "next/navigation";
@@ -14,15 +12,11 @@ import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
 
 export function Navbar() {
   const pathname = usePathname();
-  const { selected, highlighted } = usePathway();
+  const { highlighted } = usePathway();
   const { theme } = usePathwayTheme();
-  const activeRank = useActiveSequenceRank();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const sequenceLabel =
-    activeRank != null
-      ? `Sequence ${activeRank} · ${getSequenceTitle(selected, activeRank)}`
-      : `Sequence 0 · ${highlighted.name}`;
+  const sequenceLabel = `Sequence 0 · ${highlighted.name}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
