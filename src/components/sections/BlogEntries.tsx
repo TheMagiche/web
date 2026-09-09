@@ -60,7 +60,7 @@ export function BlogEntries({ posts }: BlogEntriesProps) {
               viewport={{ once: true, margin: "0px 0px -80px" }}
               transition={{ duration: 0.45, delay: index * 0.08 }}
               className={cn(
-                "group relative rounded-lg border border-border/60 bg-surface-elevated/50 p-5 transition-all",
+                "blog-parchment group relative rounded-lg border border-border/60 bg-surface-elevated/50 p-5 transition-all",
                 theme.hoverGlow
               )}
             >

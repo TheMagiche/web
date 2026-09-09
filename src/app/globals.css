@@ -229,6 +229,64 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
+.blog-parchment {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #3d2a18;
+  background-color: #d9bd7d;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(255, 245, 194, 0.55), transparent 28%),
+    radial-gradient(circle at 88% 92%, rgba(112, 62, 18, 0.2), transparent 34%),
+    repeating-linear-gradient(0deg, rgba(93, 53, 18, 0.035) 0 1px, transparent 1px 4px),
+    linear-gradient(110deg, #c9a35d 0%, #e5cb8d 48%, #cba761 100%);
+  border-color: rgba(112, 62, 18, 0.42);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22), inset 0 0 45px rgba(99, 56, 15, 0.14);
+}
+
+.blog-parchment::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  opacity: 0.3;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper-grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper-grain)' opacity='.3'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.blog-parchment > * {
+  position: relative;
+  z-index: 1;
+}
+
+.blog-parchment .text-foreground {
+  color: #332111;
+}
+
+.blog-parchment .text-muted,
+.blog-parchment .text-muted\/80,
+.blog-parchment .text-muted\/70 {
+  color: #624421;
+}
+
+.blog-parchment .text-accent-violet,
+.blog-parchment .text-accent-cyan,
+.blog-parchment .text-accent-amber {
+  color: #865017;
+}
+
+.blog-parchment .border-border\/50,
+.blog-parchment .border-border\/60,
+.blog-parchment .border-border\/70 {
+  border-color: rgba(112, 62, 18, 0.38);
+}
+
+.blog-parchment .bg-surface-elevated\/50,
+.blog-parchment .bg-surface-elevated\/30 {
+  background-color: rgba(255, 236, 168, 0.28);
+}
+
 .scene-seer {
   mask-image: radial-gradient(
     ellipse 75% 85% at 50% 38%,
