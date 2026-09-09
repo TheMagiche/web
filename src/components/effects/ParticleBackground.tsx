@@ -8,10 +8,10 @@ import { cn } from "@/lib/utils";
 
 const particleOptions: ISourceOptions = {
   fullScreen: { enable: false },
-  fpsLimit: 60,
+  fpsLimit: 30,
   particles: {
     number: {
-      value: 80,
+      value: 50,
       density: { enable: true },
     },
     color: {
@@ -32,26 +32,26 @@ const particleOptions: ISourceOptions = {
       value: { min: 1, max: 3 },
     },
     move: {
-      enable: true,
+      enable: false,
       speed: 0.4,
       direction: "top",
-      random: true,
+      random: false,
       straight: false,
       outModes: { default: "out" },
     },
     links: {
-      enable: true,
-      distance: 120,
-      color: "#9d4edd",
-      opacity: 0.08,
-      width: 1,
+      enable: false,
+      // distance: 120,
+      // color: "#9d4edd",
+      // opacity: 0.08,
+      // width: 1,
     },
   },
   interactivity: {
     detectsOn: "window",
     events: {
       onHover: {
-        enable: true,
+        enable: false,
         mode: ["attract", "grab"],
       },
     },
@@ -73,7 +73,8 @@ const particleOptions: ISourceOptions = {
       },
     },
   },
-  detectRetina: true,
+  detectRetina: false,
+  pauseOnBlur: true
 };
 
 function ParticleCanvas() {
