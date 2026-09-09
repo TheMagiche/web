@@ -1,18 +1,20 @@
 import { notFound } from "next/navigation";
 import { getDocumentBySlug, getDocumentSlugs } from "outstatic/server";
 import { TransitionLink } from "@/components/ui/TransitionLink";
+import { cn } from "@/lib/utils";
 
 interface BlogPageProps {
   params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
-  return getDocumentSlugs("posts").map((slug) => ({ slug }));
+  return getDocumentSlugs("marks-journals").map((slug) => ({ slug }));
 }
 
 export default async function BlogPostPage({ params }: BlogPageProps) {
   const { slug } = await params;
-  const post = getDocumentBySlug("posts", slug, [
+
+  const post = getDocumentBySlug("marks-journals", slug, [
     "title",
     "publishedAt",
     "content",
@@ -21,17 +23,17 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
   if (!post) notFound();
 
   return (
-    <main className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-6 py-32">
+    <main className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-6 py-32 md:px-12">
       <TransitionLink
         href="/home"
         className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted transition-colors hover:text-foreground"
       >
         ← Return to the journal
       </TransitionLink>
-      <article className="mt-12">
+      <article className="blog-parchment blog-scroll mt-12 h-[calc(100vh-12rem)] overflow-y-auto rounded-sm border p-6 md:p-10">
         <time
           dateTime={new Date(post.publishedAt).toISOString()}
-          className="font-mono text-xs uppercase tracking-[0.3em] text-accent-cyan"
+          className={cn("font-mono text-[10px] uppercase")}
         >
           {new Intl.DateTimeFormat("en", {
             year: "numeric",
