@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import {
   stopIntro,
-  startMainLoop,
-  stopMainLoop,
+  // startMainLoop,
+  // stopMainLoop,
 } from "@/lib/sound";
 
 export function BackgroundAudio() {
@@ -14,14 +14,14 @@ export function BackgroundAudio() {
 
   useEffect(() => {
     if (isLanding) {
-      stopMainLoop();
+      // stopMainLoop();
     } else {
       stopIntro();
-      startMainLoop();
+      // startMainLoop();
     }
 
     const onFirstGesture = () => {
-      if (!isLanding) startMainLoop();
+      // if (!isLanding) startMainLoop();
     };
 
     window.addEventListener("pointerdown", onFirstGesture);
@@ -36,7 +36,7 @@ export function BackgroundAudio() {
   useEffect(() => {
     return () => {
       stopIntro();
-      stopMainLoop();
+      // stopMainLoop();
     };
   }, []);
 

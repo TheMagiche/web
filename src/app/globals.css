@@ -244,7 +244,7 @@ body {
     radial-gradient(ellipse at center, transparent 10%, rgba(77, 49, 21, 0.3) 50%, rgba(38, 22, 7, 0.8) 100%),
     repeating-linear-gradient(25deg, rgba(54, 35, 15, 0.05) 0 1px, transparent 1px 6px),
     repeating-linear-gradient(-65deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 4px);
-  border-color: rgba(58, 32, 10, 0.58);
+  border-color: rgba(248, 177, 56, 0.859);
   border-radius: 40px 80px 35px 90px / 70px 35px 85px 40px;
   box-shadow:
     0 25px 50px rgba(0, 0, 0, 0.8),
@@ -334,6 +334,79 @@ body {
   font-size: 1.15rem;
   line-height: 1.7;
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+.blog-content > :first-child {
+  margin-top: 0;
+}
+
+.blog-content p {
+  margin: 1.25rem 0;
+}
+
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  margin: 2.25rem 0 0.85rem;
+  color: #0c0702;
+  font-family: var(--font-cinzel), Georgia, serif;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.blog-content h2 {
+  font-size: 1.65rem;
+  letter-spacing: 0.04em;
+}
+
+.blog-content h3 {
+  font-size: 1.35rem;
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin: 1.25rem 0;
+  padding-left: 1.5rem;
+}
+
+.blog-content ul {
+  list-style: square;
+}
+
+.blog-content li {
+  margin: 0.45rem 0;
+  padding-left: 0.25rem;
+}
+
+.blog-content strong {
+  color: #241104;
+  font-weight: 700;
+}
+
+.blog-content em {
+  color: #4b2a10;
+}
+
+.blog-content a {
+  color: #6b431f;
+  text-decoration: underline;
+  text-decoration-color: rgba(107, 67, 31, 0.55);
+  text-underline-offset: 0.2em;
+}
+
+.blog-content code {
+  border-radius: 0.2rem;
+  background: rgba(70, 38, 11, 0.12);
+  padding: 0.1em 0.3em;
+  font-size: 0.9em;
+}
+
+.blog-content pre {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(70, 38, 11, 0.25);
+  background: rgba(70, 38, 11, 0.12);
+  padding: 1rem;
 }
 
 .scene-seer {

@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { getDocumentBySlug, getDocumentSlugs } from "outstatic/server";
 import { TransitionLink } from "@/components/ui/TransitionLink";
 import { cn } from "@/lib/utils";
@@ -30,7 +32,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
       >
         ← Return to the journal
       </TransitionLink>
-      <article className="blog-parchment blog-scroll mt-12 h-[calc(100vh-12rem)] overflow-y-auto rounded-sm border p-6 md:p-10">
+      <article className="blog-parchment blog-scroll mt-12 overflow-y-auto rounded-sm border p-6 md:p-10">
         <time
           dateTime={new Date(post.publishedAt).toISOString()}
           className={cn("font-mono text-[10px] uppercase")}
@@ -44,8 +46,8 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
         <h1 className="mt-5 font-display text-4xl font-bold tracking-wide text-foreground md:text-6xl">
           {post.title}
         </h1>
-        <div className="mt-10 whitespace-pre-wrap border-t border-border/50 pt-8 text-lg leading-relaxed text-muted">
-          {post.content}
+        <div className="blog-content mt-10 border-t border-border/50 pt-8 text-lg leading-relaxed text-muted">
+          <Markdown remarkPlugins={[remarkGfm]}>{post.content}</Markdown>
         </div>
       </article>
     </main>
