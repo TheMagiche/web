@@ -1,6 +1,6 @@
 {
-  "commit": "9c356106bf4e64c15ad1672a4756d140636cb6b4",
-  "generated": "2026-09-09T22:03:00.811Z",
+  "commit": "1103f8bcd8224f52e4832e845f7387d165a48df0",
+  "generated": "2026-09-11T12:50:41.810Z",
   "metadata": [
     {
       "__outstatic": {
@@ -17,6 +17,22 @@
       "slug": "the-beginning",
       "status": "published",
       "title": "The beginning"
+    },
+    {
+      "__outstatic": {
+        "commit": "1103f8bcd8224f52e4832e845f7387d165a48df0",
+        "hash": "3913442599",
+        "path": "outstatic/content/marks-journals/betcalc-betting-ui.mdx"
+      },
+      "author": {
+        "name": "Mark Chege",
+        "picture": "https://avatars.githubusercontent.com/u/26341425?v=4"
+      },
+      "collection": "marks-journals",
+      "publishedAt": "2026-09-11T12:49:54.987Z",
+      "slug": "betcalc-betting-ui",
+      "status": "published",
+      "title": "Betcalc (betting ui)"
     }
   ]
 }
