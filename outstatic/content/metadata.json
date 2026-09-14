@@ -1,6 +1,6 @@
 {
-  "commit": "1103f8bcd8224f52e4832e845f7387d165a48df0",
-  "generated": "2026-09-11T12:50:41.810Z",
+  "commit": "d2f32a751f5cb417c8286b0fa56528ce7e8c2a27",
+  "generated": "2026-09-14T03:04:40.584Z",
   "metadata": [
     {
       "__outstatic": {
@@ -20,12 +20,12 @@
     },
     {
       "__outstatic": {
-        "commit": "1103f8bcd8224f52e4832e845f7387d165a48df0",
-        "hash": "3913442599",
+        "commit": "d2f32a751f5cb417c8286b0fa56528ce7e8c2a27",
+        "hash": "197305960",
         "path": "outstatic/content/marks-journals/betcalc-betting-ui.mdx"
       },
       "author": {
-        "name": "Mark Chege",
+        "name": "Themagiche",
         "picture": "https://avatars.githubusercontent.com/u/26341425?v=4"
       },
       "collection": "marks-journals",
