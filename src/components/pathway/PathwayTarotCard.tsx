@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { grimoireArcana } from "@/lib/data";
 import { getSequenceStory, type PathwayChoice } from "@/lib/pathways";
 import { getPathwayTheme } from "@/lib/pathwayTheme";
+import { InteractiveCardTilt } from "@/components/three/InteractiveCardTilt";
 
 interface PathwayTarotCardProps {
   pathway: PathwayChoice;
@@ -39,7 +40,7 @@ export function PathwayTarotCard({
   const face = (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl border-2 bg-linear-to-b p-1.75 transition-shadow duration-500 backface-hidden",
+        "relative overflow-hidden rounded-xl border-2 bg-linear-to-b p-1.75 transition-shadow duration-500 backface-hidden [transform-style:preserve-3d]",
         compact
           ? "h-72 w-44 sm:h-80 sm:w-48"
           : "h-112 w-68 sm:h-128 sm:w-76",
@@ -49,7 +50,7 @@ export function PathwayTarotCard({
         (selected || active) && `ring-2 ${theme.ring}`
       )}
     >
-      <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-amber-500/20 bg-surface/95">
+      <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-amber-500/20 bg-surface/95 [transform-style:preserve-3d]">
         <span className={cn("pointer-events-none absolute left-2 top-2", theme.textSoft)}>
           ⌜
         </span>
@@ -63,7 +64,7 @@ export function PathwayTarotCard({
           ⌟
         </span>
 
-        <header className={cn("text-center", compact ? "px-3 pt-4" : "px-5 pt-6")}>
+        <header className={cn("text-center [transform:translateZ(10px)]", compact ? "px-3 pt-4" : "px-5 pt-6")}>
           <p
             className={cn(
               "font-display tracking-[0.35em]",
@@ -80,7 +81,7 @@ export function PathwayTarotCard({
 
         <div
           className={cn(
-            "relative flex flex-1 flex-col items-center justify-center",
+            "relative flex flex-1 flex-col items-center justify-center [transform:translateZ(20px)]",
             compact ? "mx-4 my-2" : "mx-6 my-3"
           )}
         >
@@ -98,7 +99,7 @@ export function PathwayTarotCard({
               alt=""
               fill
               sizes="128px"
-              className="object-cover mix-blend-screen"
+              className="object-cover mix-blend-screen drop-shadow-[0_0_12px_rgba(255,255,255,0.2)]"
             />
           </div>
           {story && (
@@ -108,22 +109,25 @@ export function PathwayTarotCard({
           )}
         </div>
 
-        <footer className={cn(
-          "rounded-md border bg-surface-elevated/80 text-center",
-          compact ? "mx-3 mb-3 px-3 py-2" : "mx-4 mb-4 px-4 py-3",
-          theme.borderSoft
-        )}>
+        <footer
+          className={cn(
+            "rounded-md border bg-surface-elevated/80 text-center [transform:translateZ(12px)]",
+            compact ? "mx-3 mb-3 px-3 py-2" : "mx-4 mb-4 px-4 py-3",
+            theme.borderSoft
+          )}
+        >
           <p className={cn("font-display font-bold tracking-wide", compact ? "text-base" : "text-xl")}>
             {story ? story.title : pathway.name}
           </p>
-          {/* <p className={cn("mt-1 font-mono text-[10px] uppercase tracking-widest", theme.text)}>
-            {story
-              ? `Sequence ${rank} · ${story.title}`
-              : `Sequence 0 · ${pathway.name}`}
-          </p> */}
         </footer>
       </div>
     </div>
+  );
+
+  const cardWithTilt = (
+    <InteractiveCardTilt disabled={drawing} maxTilt={14}>
+      {face}
+    </InteractiveCardTilt>
   );
 
   const motionProps = {
@@ -153,10 +157,10 @@ export function PathwayTarotCard({
         whileHover={drawing ? undefined : { y: -8 }}
         {...motionProps}
       >
-        {face}
+        {cardWithTilt}
       </motion.button>
     );
   }
-    // @ts-expect-error
-  return <motion.div {...motionProps}>{face}</motion.div>;
+  // @ts-expect-error
+  return <motion.div {...motionProps}>{cardWithTilt}</motion.div>;
 }

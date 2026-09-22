@@ -6,6 +6,7 @@ import {
   SceneTransitionProvider,
 } from "@/components/providers/SceneTransitionProvider";
 import { SceneBackground } from "@/components/effects/SceneBackground";
+import { MysticBackgroundCanvas } from "@/components/three/MysticBackgroundCanvas";
 import { ParticleBackground } from "@/components/effects/ParticleBackground";
 import { BackgroundAudio } from "@/components/effects/BackgroundAudio";
 import { Navbar } from "@/components/layout/Navbar";
@@ -57,6 +58,7 @@ export default function SiteLayout({
         <PathwayProvider>
           <SceneTransitionProvider>
             <SceneBackground />
+            <MysticBackgroundCanvas />
             <ParticleBackground />
             <BackgroundAudio />
             <SceneContent>

@@ -12,6 +12,7 @@ import {
 import { playPaperSlide } from "@/lib/sound";
 import { usePathwayTheme } from "@/components/providers/usePathwayTheme";
 import { cn } from "@/lib/utils";
+import { MysticArtifactCanvas } from "@/components/three/MysticArtifactCanvas";
 import {
   GitHubIcon,
   KoFiIcon,
@@ -267,65 +268,77 @@ export function ContactAltar() {
   const { theme } = usePathwayTheme();
 
   return (
-    <div className="grid gap-6 md:grid-cols-3">
+    <div className="space-y-8">
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        className="flex items-center gap-3"
+        transition={{ duration: 0.6 }}
+        className="flex justify-center"
       >
-        <div className={cn("rounded border p-2", theme.borderSoft, theme.bg)}>
-          <Mail className={cn("h-4 w-4", theme.text)} />
-        </div>
-        <div>
-          <p className="font-mono text-[10px] uppercase tracking-widest text-muted">
-            The Messenger
-          </p>
-          <a
-            href={`mailto:${siteConfig.email}`}
-            className={cn("text-sm transition-colors", theme.hoverText)}
-          >
-            {siteConfig.email}
-          </a>
-        </div>
+        <MysticArtifactCanvas size={280} />
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.06 }}
-        className="flex items-center gap-3"
-      >
-        <div className={cn("rounded border p-2", theme.borderSoft, theme.bg)}>
-          <MapPin className={cn("h-4 w-4", theme.text)} />
-        </div>
-        <div>
-          <p className="font-mono text-[10px] uppercase tracking-widest text-muted">
-            Realm
-          </p>
-          <p className="text-sm">Available Worldwide · Remote</p>
-        </div>
-      </motion.div>
+      <div className="grid gap-6 md:grid-cols-3">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
+          <div className={cn("rounded border p-2", theme.borderSoft, theme.bg)}>
+            <Mail className={cn("h-4 w-4", theme.text)} />
+          </div>
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-muted">
+              The Messenger
+            </p>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className={cn("text-sm transition-colors", theme.hoverText)}
+            >
+              {siteConfig.email}
+            </a>
+          </div>
+        </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.12 }}
-        className="glass rounded-lg p-4"
-      >
-        <p className="font-mono text-xs leading-relaxed text-muted/70">
-          <span className={theme.text}>&gt;</span> Altar:{" "}
-          <span className={theme.text}>Open to opportunities</span>
-          <br />
-          <span className={theme.text}>&gt;</span> Response time:{" "}
-          <span className="text-foreground">Within 24 hours</span>
-          <br />
-          <span className={theme.text}>&gt;</span> Specialization:{" "}
-          <span className="text-foreground">Frontend · UI/UX · Motion</span>
-        </p>
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.06 }}
+          className="flex items-center gap-3"
+        >
+          <div className={cn("rounded border p-2", theme.borderSoft, theme.bg)}>
+            <MapPin className={cn("h-4 w-4", theme.text)} />
+          </div>
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-muted">
+              Realm
+            </p>
+            <p className="text-sm">Available Worldwide · Remote</p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.12 }}
+          className="glass rounded-lg p-4"
+        >
+          <p className="font-mono text-xs leading-relaxed text-muted/70">
+            <span className={theme.text}>&gt;</span> Altar:{" "}
+            <span className={theme.text}>Open to opportunities</span>
+            <br />
+            <span className={theme.text}>&gt;</span> Response time:{" "}
+            <span className="text-foreground">Within 24 hours</span>
+            <br />
+            <span className={theme.text}>&gt;</span> Specialization:{" "}
+            <span className="text-foreground">Frontend · UI/UX · Motion</span>
+          </p>
+        </motion.div>
+      </div>
     </div>
   );
 }

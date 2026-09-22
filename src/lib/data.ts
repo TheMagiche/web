@@ -123,8 +123,8 @@ export const potions = [
   {
     name: "Lord of the Mysteries",
     sequence: "Sequence 8",
-    domain: "lotmdnd.work.gd",
-    url: "https://lotmdnd.work.gd",
+    domain: "lotm-site.vercel.app",
+    url: "https://lotm-site.vercel.app",
     skills: ["React", "Batchfile", "TypeScript", "Shell"],
     color: "cyan",
     image: "lotmdnd.webp",
