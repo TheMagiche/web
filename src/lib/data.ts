@@ -113,16 +113,16 @@ export const outsiderSymbols = [
 export const potions = [
   {
     name: "Betting Strategy Analyzer",
-    sequence: "Sequence 9",
-    domain: "betcalc.work.gd",
-    url: "https://betcalc.work.gd",
+    sequence: "Sequence 6",
+    domain: "bettingui.vercel.app",
+    url: "https://bettingui.vercel.app",
     skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
     color: "violet",
     image: "betcalc.webp",
   },
   {
     name: "Lord of the Mysteries",
-    sequence: "Sequence 8",
+    sequence: "Sequence 5",
     domain: "lotm-site.vercel.app",
     url: "https://lotm-site.vercel.app",
     skills: ["React", "Batchfile", "TypeScript", "Shell"],
@@ -131,7 +131,7 @@ export const potions = [
   },
   {
     name: "Yinke Africa",
-    sequence: "Sequence 7",
+    sequence: "Sequence 8",
     domain: "yinke-next.vercel.app",
     url: "https://yinke-next.vercel.app",
     skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
@@ -140,7 +140,7 @@ export const potions = [
   },
   {
     name: "SP-analytics",
-    sequence: "Sequence 6",
+    sequence: "Sequence 9",
     domain: "sp-analytics-iota.vercel.app",
     url: "https://sp-analytics-iota.vercel.app",
     skills: ["React", "Next.js", "TypeScript", "MUI"],
